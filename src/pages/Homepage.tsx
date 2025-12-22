@@ -54,9 +54,10 @@ interface Transaction {
 interface HomepageProps {
   onNavigateToAdmin: () => void
   onNavigateToShowcase: () => void
+  onNavigateToMyProfile: () => void
 }
 
-export default function Homepage({ onNavigateToAdmin, onNavigateToShowcase }: HomepageProps) {
+export default function Homepage({ onNavigateToAdmin, onNavigateToShowcase, onNavigateToMyProfile }: HomepageProps) {
   // Mock data
   const hsaAccounts: Account[] = [
     { type: "Cash Account", balance: "$0.00" },
@@ -170,6 +171,7 @@ export default function Homepage({ onNavigateToAdmin, onNavigateToShowcase }: Ho
                       <Button
                         variant="ghost"
                         className="w-full justify-start bg-blue-50 text-blue-700 hover:bg-blue-100"
+                        onClick={onNavigateToMyProfile}
                       >
                         <User className="mr-2 h-4 w-4" />
                         My Profile

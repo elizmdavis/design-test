@@ -23,9 +23,10 @@ import { Slider } from "@/components/ui/slider"
 import { ArrowLeft } from "lucide-react"
 import AdminCustomization from "@/pages/AdminCustomization"
 import Homepage from "@/pages/Homepage"
+import MyProfile from "@/pages/MyProfile"
 
 function App() {
-  const [currentPage, setCurrentPage] = useState<"showcase" | "admin" | "homepage">("homepage")
+  const [currentPage, setCurrentPage] = useState<"showcase" | "admin" | "homepage" | "myprofile">("homepage")
   const [progress, setProgress] = useState(33)
   const [sliderValue, setSliderValue] = useState([50])
 
@@ -33,11 +34,16 @@ function App() {
     return <AdminCustomization onBack={() => setCurrentPage("homepage")} />
   }
 
+  if (currentPage === "myprofile") {
+    return <MyProfile onBack={() => setCurrentPage("homepage")} />
+  }
+
   if (currentPage === "homepage") {
     return (
       <Homepage
         onNavigateToAdmin={() => setCurrentPage("admin")}
         onNavigateToShowcase={() => setCurrentPage("showcase")}
+        onNavigateToMyProfile={() => setCurrentPage("myprofile")}
       />
     )
   }
