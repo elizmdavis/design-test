@@ -20,32 +20,45 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Skeleton } from "@/components/ui/skeleton"
 import { Progress } from "@/components/ui/progress"
 import { Slider } from "@/components/ui/slider"
+import { ArrowLeft } from "lucide-react"
 import AdminCustomization from "@/pages/AdminCustomization"
+import Homepage from "@/pages/Homepage"
 
 function App() {
-  const [currentPage, setCurrentPage] = useState<"showcase" | "admin">("showcase")
+  const [currentPage, setCurrentPage] = useState<"showcase" | "admin" | "homepage">("homepage")
   const [progress, setProgress] = useState(33)
   const [sliderValue, setSliderValue] = useState([50])
 
   if (currentPage === "admin") {
-    return <AdminCustomization onBack={() => setCurrentPage("showcase")} />
+    return <AdminCustomization onBack={() => setCurrentPage("homepage")} />
+  }
+
+  if (currentPage === "homepage") {
+    return (
+      <Homepage
+        onNavigateToAdmin={() => setCurrentPage("admin")}
+        onNavigateToShowcase={() => setCurrentPage("showcase")}
+      />
+    )
   }
 
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
       <div className="border-b">
-        <div className="container mx-auto px-4 py-6">
+        <div className="container mx-auto px-8 py-7">
           <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-4xl font-bold tracking-tight">shadcn/ui Components</h1>
-              <p className="text-muted-foreground mt-2">
-                Vite + React + TypeScript + Tailwind CSS - Component Showcase
-              </p>
+            <div className="flex items-center gap-4">
+              <Button variant="ghost" size="icon" onClick={() => setCurrentPage("homepage")}>
+                <ArrowLeft className="h-5 w-5" />
+              </Button>
+              <div>
+                <h1 className="text-3xl font-bold">shadcn/ui Components</h1>
+                <p className="text-muted-foreground mt-2">
+                  Vite + React + TypeScript + Tailwind CSS - Component Showcase
+                </p>
+              </div>
             </div>
-            <Button onClick={() => setCurrentPage("admin")}>
-              Admin Customization
-            </Button>
           </div>
         </div>
       </div>
