@@ -22,6 +22,12 @@ import {
   ShoppingCart,
   Settings,
   Palette,
+  Users,
+  Heart,
+  CreditCard,
+  Shield,
+  Mail,
+  LogOut,
 } from "lucide-react"
 
 interface Account {
@@ -144,8 +150,59 @@ export default function Homepage({ onNavigateToAdmin, onNavigateToShowcase }: Ho
                     <User className="h-5 w-5" />
                   </Button>
                 </PopoverTrigger>
-                <PopoverContent className="w-56" align="end">
-                  <div className="space-y-1">
+                <PopoverContent className="w-64 p-2" align="end">
+                  <div className="space-y-0">
+                    {/* Header Section */}
+                    <div className="flex items-center gap-2 px-3 py-2">
+                      <div className="flex h-4 w-4 items-center justify-center">
+                        <User className="h-4 w-4" />
+                      </div>
+                      <div className="flex-1">
+                        <p className="text-sm font-semibold">WEX, Inc.</p>
+                        <p className="text-xs text-muted-foreground">Switch Account</p>
+                      </div>
+                    </div>
+                    
+                    <Separator className="my-2" />
+                    
+                    {/* Menu Items */}
+                    <div className="space-y-0">
+                      <Button
+                        variant="ghost"
+                        className="w-full justify-start bg-blue-50 text-blue-700 hover:bg-blue-100"
+                      >
+                        <User className="mr-2 h-4 w-4" />
+                        My Profile
+                      </Button>
+                      <Button variant="ghost" className="w-full justify-start">
+                        <Users className="mr-2 h-4 w-4" />
+                        Dependents
+                      </Button>
+                      <Button variant="ghost" className="w-full justify-start">
+                        <Heart className="mr-2 h-4 w-4" />
+                        Beneficiaries
+                      </Button>
+                      <Button variant="ghost" className="w-full justify-start">
+                        <CreditCard className="mr-2 h-4 w-4" />
+                        Banking
+                      </Button>
+                      <Button variant="ghost" className="w-full justify-start">
+                        <CreditCard className="mr-2 h-4 w-4" />
+                        Debit Card
+                      </Button>
+                      <Button variant="ghost" className="w-full justify-start">
+                        <Shield className="mr-2 h-4 w-4" />
+                        Login and Security
+                      </Button>
+                      <Button variant="ghost" className="w-full justify-start">
+                        <Mail className="mr-2 h-4 w-4" />
+                        Communication Preferences
+                      </Button>
+                    </div>
+                    
+                    <Separator className="my-2" />
+                    
+                    {/* Admin Customization */}
                     <Button
                       variant="ghost"
                       className="w-full justify-start"
@@ -153,6 +210,12 @@ export default function Homepage({ onNavigateToAdmin, onNavigateToShowcase }: Ho
                     >
                       <Settings className="mr-2 h-4 w-4" />
                       Admin Customization
+                    </Button>
+                    
+                    {/* Log Out */}
+                    <Button variant="ghost" className="w-full justify-start text-red-600 hover:text-red-700 hover:bg-red-50">
+                      <LogOut className="mr-2 h-4 w-4" />
+                      Log Out
                     </Button>
                   </div>
                 </PopoverContent>
