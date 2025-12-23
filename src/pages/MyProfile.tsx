@@ -60,7 +60,7 @@ export default function MyProfile({
                   <Button
                     key={index}
                     variant="ghost"
-                    className={`w-full justify-start rounded px-3 py-2 text-sm ${
+                    className={`w-full justify-start rounded px-3 py-2 text-left text-sm ${
                       item.active
                         ? "bg-blue-600 text-white hover:bg-blue-700"
                         : "text-gray-700 hover:bg-gray-50"
