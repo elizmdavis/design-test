@@ -55,9 +55,10 @@ interface HomepageProps {
   onNavigateToAdmin: () => void
   onNavigateToShowcase: () => void
   onNavigateToMyProfile: () => void
+  onNavigateToMessageCenter: () => void
 }
 
-export default function Homepage({ onNavigateToAdmin, onNavigateToShowcase, onNavigateToMyProfile }: HomepageProps) {
+export default function Homepage({ onNavigateToAdmin, onNavigateToShowcase, onNavigateToMyProfile, onNavigateToMessageCenter }: HomepageProps) {
   // Mock data
   const hsaAccounts: Account[] = [
     { type: "Cash Account", balance: "$0.00" },
@@ -141,7 +142,7 @@ export default function Homepage({ onNavigateToAdmin, onNavigateToShowcase, onNa
               <Button variant="ghost" size="icon">
                 <Grid3x3 className="h-5 w-5" />
               </Button>
-              <Button variant="ghost" size="icon" className="relative">
+              <Button variant="ghost" size="icon" className="relative" onClick={onNavigateToMessageCenter}>
                 <Bell className="h-5 w-5" />
                 <span className="absolute right-1 top-1 h-2 w-2 rounded-full bg-red-500" />
               </Button>
