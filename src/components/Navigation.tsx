@@ -27,6 +27,7 @@ interface NavigationProps {
   onNavigateToMyProfile: () => void
   onNavigateToAdmin: () => void
   onNavigateToMessageCenter?: () => void
+  onLogout: () => void
 }
 
 export default function Navigation({
@@ -35,6 +36,7 @@ export default function Navigation({
   onNavigateToMyProfile,
   onNavigateToAdmin,
   onNavigateToMessageCenter,
+  onLogout,
 }: NavigationProps) {
   const isHomeActive = currentPage === "homepage"
   const isAccountsActive = currentPage === "accounts" || currentPage === "hsa" || currentPage === "fsa"
@@ -226,6 +228,7 @@ export default function Navigation({
                   <Button
                     variant="ghost"
                     className="w-full justify-start text-red-600 hover:text-red-700 hover:bg-red-50"
+                    onClick={onLogout}
                   >
                     <LogOut className="mr-2 h-4 w-4" />
                     Log Out

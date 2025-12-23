@@ -21,6 +21,7 @@ import { Skeleton } from "@/components/ui/skeleton"
 import { Progress } from "@/components/ui/progress"
 import { Slider } from "@/components/ui/slider"
 import { ArrowLeft } from "lucide-react"
+import Login from "@/pages/Login"
 import AdminCustomization from "@/pages/AdminCustomization"
 import Homepage from "@/pages/Homepage"
 import MyProfile from "@/pages/MyProfile"
@@ -32,11 +33,21 @@ import FSA from "@/pages/FSA"
 import MessageCenter from "@/pages/MessageCenter"
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [currentPage, setCurrentPage] = useState<
     "showcase" | "admin" | "homepage" | "myprofile" | "accounts" | "claims" | "resources" | "hsa" | "fsa" | "messagecenter"
   >("homepage")
   const [progress, setProgress] = useState(33)
   const [sliderValue, setSliderValue] = useState([50])
+
+  const handleLogin = () => {
+    setIsAuthenticated(true)
+    setCurrentPage("homepage")
+  }
+
+  const handleLogout = () => {
+    setIsAuthenticated(false)
+  }
 
   const handleNavigate = (page: string) => {
     setCurrentPage(page as typeof currentPage)
@@ -50,6 +61,11 @@ function App() {
     setCurrentPage("admin")
   }
 
+  // Show login page if not authenticated
+  if (!isAuthenticated) {
+    return <Login onLoginSuccess={handleLogin} />
+  }
+
   if (currentPage === "admin") {
     return (
       <AdminCustomization
@@ -57,6 +73,7 @@ function App() {
         onNavigate={handleNavigate}
         onNavigateToMyProfile={handleNavigateToMyProfile}
         onNavigateToAdmin={handleNavigateToAdmin}
+        onLogout={handleLogout}
       />
     )
   }
@@ -68,12 +85,22 @@ function App() {
         onNavigate={handleNavigate}
         onNavigateToMyProfile={handleNavigateToMyProfile}
         onNavigateToAdmin={handleNavigateToAdmin}
+        onLogout={handleLogout}
       />
     )
   }
 
   if (currentPage === "messagecenter") {
-    return <MessageCenter onBack={() => setCurrentPage("homepage")} />
+    return (
+      <MessageCenter
+        currentPage={currentPage}
+        onNavigate={handleNavigate}
+        onNavigateToMyProfile={handleNavigateToMyProfile}
+        onNavigateToAdmin={handleNavigateToAdmin}
+        onLogout={handleLogout}
+        onBack={() => setCurrentPage("homepage")}
+      />
+    )
   }
 
   if (currentPage === "homepage") {
@@ -85,6 +112,7 @@ function App() {
         onNavigateToShowcase={() => setCurrentPage("showcase")}
         onNavigateToMyProfile={handleNavigateToMyProfile}
         onNavigateToMessageCenter={() => setCurrentPage("messagecenter")}
+        onLogout={handleLogout}
       />
     )
   }
@@ -96,6 +124,7 @@ function App() {
         onNavigate={handleNavigate}
         onNavigateToMyProfile={handleNavigateToMyProfile}
         onNavigateToAdmin={handleNavigateToAdmin}
+        onLogout={handleLogout}
       />
     )
   }
@@ -107,6 +136,7 @@ function App() {
         onNavigate={handleNavigate}
         onNavigateToMyProfile={handleNavigateToMyProfile}
         onNavigateToAdmin={handleNavigateToAdmin}
+        onLogout={handleLogout}
       />
     )
   }
@@ -118,6 +148,7 @@ function App() {
         onNavigate={handleNavigate}
         onNavigateToMyProfile={handleNavigateToMyProfile}
         onNavigateToAdmin={handleNavigateToAdmin}
+        onLogout={handleLogout}
       />
     )
   }
@@ -129,6 +160,7 @@ function App() {
         onNavigate={handleNavigate}
         onNavigateToMyProfile={handleNavigateToMyProfile}
         onNavigateToAdmin={handleNavigateToAdmin}
+        onLogout={handleLogout}
       />
     )
   }
@@ -140,6 +172,7 @@ function App() {
         onNavigate={handleNavigate}
         onNavigateToMyProfile={handleNavigateToMyProfile}
         onNavigateToAdmin={handleNavigateToAdmin}
+        onLogout={handleLogout}
       />
     )
   }

@@ -5,6 +5,7 @@ interface ResourcesProps {
   onNavigate: (page: string) => void
   onNavigateToMyProfile: () => void
   onNavigateToAdmin: () => void
+  onLogout: () => void
 }
 
 export default function Resources({
@@ -12,6 +13,7 @@ export default function Resources({
   onNavigate,
   onNavigateToMyProfile,
   onNavigateToAdmin,
+  onLogout,
 }: ResourcesProps) {
   return (
     <div className="min-h-screen bg-background">
@@ -20,6 +22,7 @@ export default function Resources({
         onNavigate={onNavigate}
         onNavigateToMyProfile={onNavigateToMyProfile}
         onNavigateToAdmin={onNavigateToAdmin}
+        onLogout={onLogout}
       />
       <div className="mx-auto max-w-[1440px] px-8 py-8">
         <div className="mx-auto max-w-[1376px]">

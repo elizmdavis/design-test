@@ -10,8 +10,8 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import Navigation from "@/components/Navigation"
 import {
-  Bell,
   Star,
   Paperclip,
   MoreVertical,
@@ -21,16 +21,17 @@ import {
   ChevronsRight,
   FileText,
   Settings,
-  Home,
-  User,
-  LifeBuoy,
-  ChevronDown,
   Inbox,
   Folder,
 } from "lucide-react"
 
 interface MessageCenterProps {
-  onBack: () => void
+  currentPage: string
+  onNavigate: (page: string) => void
+  onNavigateToMyProfile: () => void
+  onNavigateToAdmin: () => void
+  onLogout: () => void
+  onBack?: () => void
 }
 
 interface Message {
@@ -45,7 +46,14 @@ interface Message {
   isBold: boolean
 }
 
-export default function MessageCenter({ onBack: _onBack }: MessageCenterProps) {
+export default function MessageCenter({
+  currentPage,
+  onNavigate,
+  onNavigateToMyProfile,
+  onNavigateToAdmin,
+  onLogout,
+  onBack: _onBack,
+}: MessageCenterProps) {
   // onBack is available for future use
   const messages: Message[] = [
     {
@@ -163,51 +171,13 @@ export default function MessageCenter({ onBack: _onBack }: MessageCenterProps) {
   return (
     <div className="min-h-screen bg-[#f1fafe]">
       {/* Navigation Bar */}
-      <nav className="border-b bg-white">
-        <div className="mx-auto max-w-[1440px] px-8">
-          <div className="flex h-20 items-center justify-between">
-            {/* Left: Logo */}
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2">
-                <span className="text-2xl font-bold text-red-600">wex</span>
-              </div>
-            </div>
-
-            {/* Center: Navigation Menu */}
-            <div className="flex items-center gap-8">
-              <Button variant="ghost" className="flex items-center gap-2 bg-blue-50 text-blue-700">
-                <Home className="h-4 w-4" />
-                Home
-              </Button>
-              <Button variant="ghost" className="flex items-center gap-2">
-                <User className="h-4 w-4" />
-                Accounts
-                <ChevronDown className="h-4 w-4" />
-              </Button>
-              <Button variant="ghost" className="flex items-center gap-2">
-                <FileText className="h-4 w-4" />
-                Claims
-              </Button>
-              <Button variant="ghost" className="flex items-center gap-2">
-                <LifeBuoy className="h-4 w-4" />
-                Resources
-                <ChevronDown className="h-4 w-4" />
-              </Button>
-            </div>
-
-            {/* Right: Utility Icons */}
-            <div className="flex items-center gap-4">
-              <Button variant="ghost" size="icon" className="relative">
-                <Bell className="h-5 w-5" />
-                <span className="absolute right-1 top-1 h-2 w-2 rounded-full bg-red-500" />
-              </Button>
-              <Button variant="ghost" size="icon">
-                <User className="h-5 w-5" />
-              </Button>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navigation
+        currentPage={currentPage}
+        onNavigate={onNavigate}
+        onNavigateToMyProfile={onNavigateToMyProfile}
+        onNavigateToAdmin={onNavigateToAdmin}
+        onLogout={onLogout}
+      />
 
       {/* Main Content */}
       <div className="mx-auto max-w-[1440px] px-8 py-8">
