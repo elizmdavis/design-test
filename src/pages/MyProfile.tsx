@@ -11,6 +11,7 @@ interface MyProfileProps {
   onNavigate: (page: string) => void
   onNavigateToMyProfile: () => void
   onNavigateToAdmin: () => void
+  onLogout: () => void
 }
 
 export default function MyProfile({
@@ -18,6 +19,7 @@ export default function MyProfile({
   onNavigate,
   onNavigateToMyProfile,
   onNavigateToAdmin,
+  onLogout,
 }: MyProfileProps) {
   const menuItems = [
     { label: "My Profile", active: true },
@@ -36,6 +38,7 @@ export default function MyProfile({
         onNavigate={onNavigate}
         onNavigateToMyProfile={onNavigateToMyProfile}
         onNavigateToAdmin={onNavigateToAdmin}
+        onLogout={onLogout}
       />
 
       {/* Main Content */}

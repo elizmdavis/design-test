@@ -46,6 +46,7 @@ interface HomepageProps {
   onNavigateToShowcase: () => void
   onNavigateToMyProfile: () => void
   onNavigateToMessageCenter: () => void
+  onLogout: () => void
 }
 
 export default function Homepage({
@@ -55,6 +56,7 @@ export default function Homepage({
   onNavigateToShowcase,
   onNavigateToMyProfile,
   onNavigateToMessageCenter,
+  onLogout,
 }: HomepageProps) {
   // Mock data
   const hsaAccounts: Account[] = [
@@ -107,6 +109,7 @@ export default function Homepage({
         onNavigateToMyProfile={onNavigateToMyProfile}
         onNavigateToAdmin={onNavigateToAdmin}
         onNavigateToMessageCenter={onNavigateToMessageCenter}
+        onLogout={onLogout}
       />
 
       {/* Main Content Container */}

@@ -24,6 +24,7 @@ interface AdminCustomizationProps {
   onNavigate: (page: string) => void
   onNavigateToMyProfile: () => void
   onNavigateToAdmin: () => void
+  onLogout: () => void
 }
 
 export default function AdminCustomization({
@@ -31,6 +32,7 @@ export default function AdminCustomization({
   onNavigate,
   onNavigateToMyProfile,
   onNavigateToAdmin,
+  onLogout,
 }: AdminCustomizationProps) {
   const [brandColors, setBrandColors] = useState<BrandColor[]>([
     { id: 1, name: "Color 1", hex: "#0073cf" },
@@ -79,6 +81,7 @@ export default function AdminCustomization({
         onNavigate={onNavigate}
         onNavigateToMyProfile={onNavigateToMyProfile}
         onNavigateToAdmin={onNavigateToAdmin}
+        onLogout={onLogout}
       />
       {/* Header */}
       <div className="border-b">
