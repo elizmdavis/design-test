@@ -89,16 +89,17 @@ export default function MyProfile({ onBack }: MyProfileProps) {
             <div className="w-[234px] rounded-l-2xl border border-r-0 bg-white p-4">
               <div className="space-y-2">
                 {menuItems.map((item, index) => (
-                  <button
+                  <Button
                     key={index}
-                    className={`w-full rounded px-3 py-2 text-left text-sm ${
+                    variant="ghost"
+                    className={`w-full justify-start rounded px-3 py-2 text-left text-sm ${
                       item.active
-                        ? "bg-blue-600 text-white"
+                        ? "bg-blue-600 text-white hover:bg-blue-700"
                         : "text-gray-700 hover:bg-gray-50"
                     }`}
                   >
                     {item.label}
-                  </button>
+                  </Button>
                 ))}
               </div>
             </div>
