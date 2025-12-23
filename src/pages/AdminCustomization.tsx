@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import Navigation from "@/components/Navigation"
 import { Pencil, Upload, ArrowLeft } from "lucide-react"
 
 interface BrandColor {
@@ -19,10 +20,18 @@ interface ColorMapping {
 }
 
 interface AdminCustomizationProps {
-  onBack?: () => void
+  currentPage: string
+  onNavigate: (page: string) => void
+  onNavigateToMyProfile: () => void
+  onNavigateToAdmin: () => void
 }
 
-export default function AdminCustomization({ onBack }: AdminCustomizationProps) {
+export default function AdminCustomization({
+  currentPage,
+  onNavigate,
+  onNavigateToMyProfile,
+  onNavigateToAdmin,
+}: AdminCustomizationProps) {
   const [brandColors, setBrandColors] = useState<BrandColor[]>([
     { id: 1, name: "Color 1", hex: "#0073cf" },
     { id: 2, name: "Color 2", hex: "#E4F5FD" },
@@ -65,16 +74,20 @@ export default function AdminCustomization({ onBack }: AdminCustomizationProps) 
 
   return (
     <div className="min-h-screen bg-background">
+      <Navigation
+        currentPage={currentPage}
+        onNavigate={onNavigate}
+        onNavigateToMyProfile={onNavigateToMyProfile}
+        onNavigateToAdmin={onNavigateToAdmin}
+      />
       {/* Header */}
       <div className="border-b">
         <div className="container mx-auto px-8 py-7">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              {onBack && (
-                <Button variant="ghost" size="icon" onClick={onBack}>
-                  <ArrowLeft className="h-5 w-5" />
-                </Button>
-              )}
+              <Button variant="ghost" size="icon" onClick={() => onNavigate("homepage")}>
+                <ArrowLeft className="h-5 w-5" />
+              </Button>
               <h1 className="text-3xl font-bold">Appearance</h1>
             </div>
             <div className="flex gap-3">

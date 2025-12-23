@@ -45,7 +45,8 @@ interface Message {
   isBold: boolean
 }
 
-export default function MessageCenter({ onBack }: MessageCenterProps) {
+export default function MessageCenter({ onBack: _onBack }: MessageCenterProps) {
+  // onBack is available for future use
   const messages: Message[] = [
     {
       id: "1",

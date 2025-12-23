@@ -1,29 +1,24 @@
 import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { Separator } from "@/components/ui/separator"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
+import Navigation from "@/components/Navigation"
 import {
   ArrowLeft,
-  User,
-  Users,
-  Heart,
-  CreditCard,
-  Shield,
-  Mail,
-  LogOut,
-  Grid3x3,
-  Bell,
-  Menu,
-  Globe,
   Pencil,
   Info,
 } from "lucide-react"
 
 interface MyProfileProps {
-  onBack?: () => void
+  currentPage: string
+  onNavigate: (page: string) => void
+  onNavigateToMyProfile: () => void
+  onNavigateToAdmin: () => void
 }
 
-export default function MyProfile({ onBack }: MyProfileProps) {
+export default function MyProfile({
+  currentPage,
+  onNavigate,
+  onNavigateToMyProfile,
+  onNavigateToAdmin,
+}: MyProfileProps) {
   const menuItems = [
     { label: "My Profile", active: true },
     { label: "Dependents", active: false },
@@ -36,51 +31,21 @@ export default function MyProfile({ onBack }: MyProfileProps) {
 
   return (
     <div className="min-h-screen bg-blue-50">
-      {/* Navigation Bar */}
-      <nav className="border-b bg-white">
-        <div className="mx-auto max-w-[1440px] px-8">
-          <div className="flex h-20 items-center justify-between">
-            {/* Left: Logo */}
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2">
-                <Menu className="h-4 w-4" />
-                <span className="text-base font-semibold">Menu</span>
-              </div>
-              <div className="h-12 w-px bg-gray-200" />
-              <div className="flex items-center gap-2">
-                <span className="text-2xl font-bold text-red-600">wex</span>
-              </div>
-            </div>
-
-            {/* Right: Utility Icons */}
-            <div className="flex items-center gap-4">
-              <Button variant="ghost" size="icon">
-                <Globe className="h-4 w-4" />
-              </Button>
-              <div className="h-12 w-px bg-gray-200" />
-              <Button variant="ghost" size="icon" className="relative">
-                <Bell className="h-4 w-4" />
-                <span className="absolute right-1 top-1 h-2 w-2 rounded-full bg-red-500" />
-              </Button>
-              <div className="h-12 w-px bg-gray-200" />
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-200">
-                <span className="text-sm font-medium">EM</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navigation
+        currentPage={currentPage}
+        onNavigate={onNavigate}
+        onNavigateToMyProfile={onNavigateToMyProfile}
+        onNavigateToAdmin={onNavigateToAdmin}
+      />
 
       {/* Main Content */}
       <div className="mx-auto max-w-[1440px] px-8 py-8">
         <div className="mx-auto max-w-[1376px]">
           {/* Page Header */}
           <div className="mb-8 flex items-center gap-4">
-            {onBack && (
-              <Button variant="ghost" size="icon" onClick={onBack}>
-                <ArrowLeft className="h-5 w-5" />
-              </Button>
-            )}
+            <Button variant="ghost" size="icon" onClick={() => onNavigate("homepage")}>
+              <ArrowLeft className="h-5 w-5" />
+            </Button>
             <h1 className="text-2xl font-semibold text-gray-800">My Account</h1>
           </div>
 

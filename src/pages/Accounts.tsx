@@ -1,0 +1,33 @@
+import Navigation from "@/components/Navigation"
+
+interface AccountsProps {
+  currentPage: string
+  onNavigate: (page: string) => void
+  onNavigateToMyProfile: () => void
+  onNavigateToAdmin: () => void
+}
+
+export default function Accounts({
+  currentPage,
+  onNavigate,
+  onNavigateToMyProfile,
+  onNavigateToAdmin,
+}: AccountsProps) {
+  return (
+    <div className="min-h-screen bg-background">
+      <Navigation
+        currentPage={currentPage}
+        onNavigate={onNavigate}
+        onNavigateToMyProfile={onNavigateToMyProfile}
+        onNavigateToAdmin={onNavigateToAdmin}
+      />
+      <div className="mx-auto max-w-[1440px] px-8 py-8">
+        <div className="mx-auto max-w-[1376px]">
+          <h1 className="text-3xl font-bold mb-4">Accounts</h1>
+          <p className="text-muted-foreground">Accounts overview page content will go here.</p>
+        </div>
+      </div>
+    </div>
+  )
+}
+
