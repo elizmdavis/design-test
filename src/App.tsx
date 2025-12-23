@@ -89,10 +89,6 @@ function App() {
     )
   }
 
-  if (currentPage === "messagecenter") {
-    return <MessageCenter onBack={() => setCurrentPage("homepage")} />
-  }
-
   if (currentPage === "accounts") {
     return (
       <Accounts

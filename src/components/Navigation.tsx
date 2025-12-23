@@ -26,6 +26,7 @@ interface NavigationProps {
   onNavigate: (page: string) => void
   onNavigateToMyProfile: () => void
   onNavigateToAdmin: () => void
+  onNavigateToMessageCenter?: () => void
 }
 
 export default function Navigation({
@@ -33,6 +34,7 @@ export default function Navigation({
   onNavigate,
   onNavigateToMyProfile,
   onNavigateToAdmin,
+  onNavigateToMessageCenter,
 }: NavigationProps) {
   const isHomeActive = currentPage === "homepage"
   const isAccountsActive = currentPage === "accounts" || currentPage === "hsa" || currentPage === "fsa"
@@ -136,7 +138,12 @@ export default function Navigation({
               <Globe className="h-4 w-4 text-[#243746]" />
             </Button>
             <Separator orientation="vertical" className="h-11" />
-            <Button variant="ghost" size="icon" className="relative h-11 w-11">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="relative h-11 w-11"
+              onClick={onNavigateToMessageCenter}
+            >
               <Bell className="h-4 w-4 text-[#243746]" />
               <Badge className="absolute right-2 top-2 h-4 w-4 rounded-full bg-[#d23f57] p-0 text-[10px] font-bold leading-4 text-white">
                 0
