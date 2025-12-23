@@ -24,9 +24,10 @@ import { ArrowLeft } from "lucide-react"
 import AdminCustomization from "@/pages/AdminCustomization"
 import Homepage from "@/pages/Homepage"
 import MyProfile from "@/pages/MyProfile"
+import MessageCenter from "@/pages/MessageCenter"
 
 function App() {
-  const [currentPage, setCurrentPage] = useState<"showcase" | "admin" | "homepage" | "myprofile">("homepage")
+  const [currentPage, setCurrentPage] = useState<"showcase" | "admin" | "homepage" | "myprofile" | "messagecenter">("homepage")
   const [progress, setProgress] = useState(33)
   const [sliderValue, setSliderValue] = useState([50])
 
@@ -38,12 +39,17 @@ function App() {
     return <MyProfile onBack={() => setCurrentPage("homepage")} />
   }
 
+  if (currentPage === "messagecenter") {
+    return <MessageCenter onBack={() => setCurrentPage("homepage")} />
+  }
+
   if (currentPage === "homepage") {
     return (
       <Homepage
         onNavigateToAdmin={() => setCurrentPage("admin")}
         onNavigateToShowcase={() => setCurrentPage("showcase")}
         onNavigateToMyProfile={() => setCurrentPage("myprofile")}
+        onNavigateToMessageCenter={() => setCurrentPage("messagecenter")}
       />
     )
   }
