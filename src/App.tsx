@@ -24,19 +24,52 @@ import { ArrowLeft } from "lucide-react"
 import AdminCustomization from "@/pages/AdminCustomization"
 import Homepage from "@/pages/Homepage"
 import MyProfile from "@/pages/MyProfile"
+import Accounts from "@/pages/Accounts"
+import Claims from "@/pages/Claims"
+import Resources from "@/pages/Resources"
+import HSA from "@/pages/HSA"
+import FSA from "@/pages/FSA"
 import MessageCenter from "@/pages/MessageCenter"
 
 function App() {
-  const [currentPage, setCurrentPage] = useState<"showcase" | "admin" | "homepage" | "myprofile" | "messagecenter">("homepage")
+  const [currentPage, setCurrentPage] = useState<
+    "showcase" | "admin" | "homepage" | "myprofile" | "accounts" | "claims" | "resources" | "hsa" | "fsa" | "messagecenter"
+  >("homepage")
   const [progress, setProgress] = useState(33)
   const [sliderValue, setSliderValue] = useState([50])
 
+  const handleNavigate = (page: string) => {
+    setCurrentPage(page as typeof currentPage)
+  }
+
+  const handleNavigateToMyProfile = () => {
+    setCurrentPage("myprofile")
+  }
+
+  const handleNavigateToAdmin = () => {
+    setCurrentPage("admin")
+  }
+
   if (currentPage === "admin") {
-    return <AdminCustomization onBack={() => setCurrentPage("homepage")} />
+    return (
+      <AdminCustomization
+        currentPage={currentPage}
+        onNavigate={handleNavigate}
+        onNavigateToMyProfile={handleNavigateToMyProfile}
+        onNavigateToAdmin={handleNavigateToAdmin}
+      />
+    )
   }
 
   if (currentPage === "myprofile") {
-    return <MyProfile onBack={() => setCurrentPage("homepage")} />
+    return (
+      <MyProfile
+        currentPage={currentPage}
+        onNavigate={handleNavigate}
+        onNavigateToMyProfile={handleNavigateToMyProfile}
+        onNavigateToAdmin={handleNavigateToAdmin}
+      />
+    )
   }
 
   if (currentPage === "messagecenter") {
@@ -46,10 +79,67 @@ function App() {
   if (currentPage === "homepage") {
     return (
       <Homepage
-        onNavigateToAdmin={() => setCurrentPage("admin")}
+        currentPage={currentPage}
+        onNavigate={handleNavigate}
+        onNavigateToAdmin={handleNavigateToAdmin}
         onNavigateToShowcase={() => setCurrentPage("showcase")}
-        onNavigateToMyProfile={() => setCurrentPage("myprofile")}
+        onNavigateToMyProfile={handleNavigateToMyProfile}
         onNavigateToMessageCenter={() => setCurrentPage("messagecenter")}
+      />
+    )
+  }
+
+  if (currentPage === "accounts") {
+    return (
+      <Accounts
+        currentPage={currentPage}
+        onNavigate={handleNavigate}
+        onNavigateToMyProfile={handleNavigateToMyProfile}
+        onNavigateToAdmin={handleNavigateToAdmin}
+      />
+    )
+  }
+
+  if (currentPage === "claims") {
+    return (
+      <Claims
+        currentPage={currentPage}
+        onNavigate={handleNavigate}
+        onNavigateToMyProfile={handleNavigateToMyProfile}
+        onNavigateToAdmin={handleNavigateToAdmin}
+      />
+    )
+  }
+
+  if (currentPage === "resources") {
+    return (
+      <Resources
+        currentPage={currentPage}
+        onNavigate={handleNavigate}
+        onNavigateToMyProfile={handleNavigateToMyProfile}
+        onNavigateToAdmin={handleNavigateToAdmin}
+      />
+    )
+  }
+
+  if (currentPage === "hsa") {
+    return (
+      <HSA
+        currentPage={currentPage}
+        onNavigate={handleNavigate}
+        onNavigateToMyProfile={handleNavigateToMyProfile}
+        onNavigateToAdmin={handleNavigateToAdmin}
+      />
+    )
+  }
+
+  if (currentPage === "fsa") {
+    return (
+      <FSA
+        currentPage={currentPage}
+        onNavigate={handleNavigate}
+        onNavigateToMyProfile={handleNavigateToMyProfile}
+        onNavigateToAdmin={handleNavigateToAdmin}
       />
     )
   }
