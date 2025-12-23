@@ -29,10 +29,11 @@ import Claims from "@/pages/Claims"
 import Resources from "@/pages/Resources"
 import HSA from "@/pages/HSA"
 import FSA from "@/pages/FSA"
+import MessageCenter from "@/pages/MessageCenter"
 
 function App() {
   const [currentPage, setCurrentPage] = useState<
-    "showcase" | "admin" | "homepage" | "myprofile" | "accounts" | "claims" | "resources" | "hsa" | "fsa"
+    "showcase" | "admin" | "homepage" | "myprofile" | "accounts" | "claims" | "resources" | "hsa" | "fsa" | "messagecenter"
   >("homepage")
   const [progress, setProgress] = useState(33)
   const [sliderValue, setSliderValue] = useState([50])
@@ -71,6 +72,10 @@ function App() {
     )
   }
 
+  if (currentPage === "messagecenter") {
+    return <MessageCenter onBack={() => setCurrentPage("homepage")} />
+  }
+
   if (currentPage === "homepage") {
     return (
       <Homepage
@@ -79,8 +84,13 @@ function App() {
         onNavigateToAdmin={handleNavigateToAdmin}
         onNavigateToShowcase={() => setCurrentPage("showcase")}
         onNavigateToMyProfile={handleNavigateToMyProfile}
+        onNavigateToMessageCenter={() => setCurrentPage("messagecenter")}
       />
     )
+  }
+
+  if (currentPage === "messagecenter") {
+    return <MessageCenter onBack={() => setCurrentPage("homepage")} />
   }
 
   if (currentPage === "accounts") {
