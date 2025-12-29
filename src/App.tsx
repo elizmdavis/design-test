@@ -34,6 +34,29 @@ import Resources from "@/pages/Resources"
 import HSA from "@/pages/HSA"
 import FSA from "@/pages/FSA"
 import MessageCenter from "@/pages/MessageCenter"
+import ReimburseMyself from "@/pages/ReimburseMyself"
+import ReimburseDocs from "@/pages/ReimburseDocs"
+import ReimburseAnalyze from "@/pages/ReimburseAnalyze"
+import ReimburseReview from "@/pages/ReimburseReview"
+import ReimburseConfirm from "@/pages/ReimburseConfirm"
+
+const validPages = [
+  "showcase",
+  "admin",
+  "homepage",
+  "myprofile",
+  "accounts",
+  "claims",
+  "resources",
+  "hsa",
+  "fsa",
+  "messagecenter",
+  "reimburse",
+  "reimburse-docs",
+  "reimburse-analyze",
+  "reimburse-review",
+  "reimburse-confirm",
+] as const
 
 function App() {
   // Initialize authentication state from localStorage
@@ -47,14 +70,11 @@ function App() {
   })
   
   // Initialize current page from localStorage, default to "homepage"
-  const [currentPage, setCurrentPage] = useState<
-    "showcase" | "admin" | "homepage" | "myprofile" | "accounts" | "claims" | "resources" | "hsa" | "fsa" | "messagecenter"
-  >(() => {
+  const [currentPage, setCurrentPage] = useState<(typeof validPages)[number]>(() => {
     try {
       const stored = localStorage.getItem("currentPage")
-      const validPages = ["showcase", "admin", "homepage", "myprofile", "accounts", "claims", "resources", "hsa", "fsa", "messagecenter"]
-      if (stored && validPages.includes(stored)) {
-        return stored as typeof currentPage
+      if (stored && validPages.includes(stored as (typeof validPages)[number])) {
+        return stored as (typeof validPages)[number]
       }
     } catch {
       // Ignore errors
@@ -81,10 +101,11 @@ function App() {
   }, [])
 
   // Helper function to update page and save to localStorage
-  const updatePage = (page: typeof currentPage) => {
-    setCurrentPage(page)
+  const updatePage = (page: string) => {
+    const nextPage = validPages.includes(page as (typeof validPages)[number]) ? page : "homepage"
+    setCurrentPage(nextPage as (typeof validPages)[number])
     try {
-      localStorage.setItem("currentPage", page)
+      localStorage.setItem("currentPage", nextPage)
     } catch (error) {
       console.warn("Failed to save currentPage to localStorage:", error)
     }
@@ -117,10 +138,7 @@ function App() {
     }
   }
 
-  const handleNavigate = (page: string) => {
-    const pageValue = page as typeof currentPage
-    updatePage(pageValue)
-  }
+  const handleNavigate = (page: string) => updatePage(page)
 
   const handleNavigateToMyProfile = () => {
     updatePage("myprofile")
@@ -251,6 +269,70 @@ function App() {
     )
   }
 
+  if (currentPage === "reimburse") {
+    return (
+      <ReimburseMyself
+        currentPage={currentPage}
+        onNavigate={handleNavigate}
+        onNavigateToMyProfile={handleNavigateToMyProfile}
+        onNavigateToAdmin={handleNavigateToAdmin}
+        onNavigateToMessageCenter={() => updatePage("messagecenter")}
+        onLogout={handleLogout}
+      />
+    )
+  }
+
+  if (currentPage === "reimburse-docs") {
+    return (
+      <ReimburseDocs
+        currentPage={currentPage}
+        onNavigate={handleNavigate}
+        onNavigateToMyProfile={handleNavigateToMyProfile}
+        onNavigateToAdmin={handleNavigateToAdmin}
+        onNavigateToMessageCenter={() => updatePage("messagecenter")}
+        onLogout={handleLogout}
+      />
+    )
+  }
+
+  if (currentPage === "reimburse-analyze") {
+    return (
+      <ReimburseAnalyze
+        currentPage={currentPage}
+        onNavigate={handleNavigate}
+        onNavigateToMyProfile={handleNavigateToMyProfile}
+        onNavigateToAdmin={handleNavigateToAdmin}
+        onNavigateToMessageCenter={() => updatePage("messagecenter")}
+        onLogout={handleLogout}
+      />
+    )
+  }
+
+  if (currentPage === "reimburse-review") {
+    return (
+      <ReimburseReview
+        currentPage={currentPage}
+        onNavigate={handleNavigate}
+        onNavigateToMyProfile={handleNavigateToMyProfile}
+        onNavigateToAdmin={handleNavigateToAdmin}
+        onNavigateToMessageCenter={() => updatePage("messagecenter")}
+        onLogout={handleLogout}
+      />
+    )
+  }
+
+  if (currentPage === "reimburse-confirm") {
+    return (
+      <ReimburseConfirm
+        currentPage={currentPage}
+        onNavigate={handleNavigate}
+        onNavigateToMyProfile={handleNavigateToMyProfile}
+        onNavigateToAdmin={handleNavigateToAdmin}
+        onNavigateToMessageCenter={() => updatePage("messagecenter")}
+        onLogout={handleLogout}
+      />
+    )
+  }
   if (currentPage === "fsa") {
     return (
       <FSA

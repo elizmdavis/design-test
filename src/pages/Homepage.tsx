@@ -94,11 +94,11 @@ export default function Homepage({
   ]
 
   const suggestionChips = [
-    "Reimburse Myself",
-    "Send Payment",
-    "Contribute to HSA",
-    "Manage Investments",
-    "Manage My Expenses",
+    { label: "Reimburse Myself", onClick: () => onNavigate("reimburse") },
+    { label: "Send Payment" },
+    { label: "Contribute to HSA" },
+    { label: "Manage Investments" },
+    { label: "Manage My Expenses" },
   ]
 
   return (
@@ -157,8 +157,9 @@ export default function Homepage({
                     variant="outline"
                     size="sm"
                     className="rounded-full bg-blue-50 text-blue-700 hover:bg-blue-100"
+                    onClick={chip.onClick}
                   >
-                    {chip}
+                    {chip.label}
                   </Button>
                 ))}
               </div>
@@ -174,7 +175,7 @@ export default function Homepage({
                   <Button variant="link" className="text-blue-600">
                     View All Accounts →
                   </Button>
-                  <Button>Reimburse Myself</Button>
+                  <Button onClick={() => onNavigate("reimburse")}>Reimburse Myself</Button>
                 </div>
               </div>
 
@@ -209,7 +210,7 @@ export default function Homepage({
                 {/* FSA Card */}
                 <Card>
                   <CardContent className="p-6">
-                    <h4 className="mb-4 text-lg font-semibold">01/01//2025 -12/31/2025</h4>
+                    <h4 className="mb-4 text-lg font-semibold">01/01/2025 -12/31/2025</h4>
                     <Separator className="mb-4" />
                     <div className="space-y-0">
                       {/* Table Header */}
