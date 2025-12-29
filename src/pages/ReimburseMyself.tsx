@@ -1,5 +1,5 @@
 import type { FormEvent } from "react"
-import { useMemo, useState, useEffect } from "react"
+import { useMemo, useState } from "react"
 import Navigation from "@/components/Navigation"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { Badge } from "@/components/ui/badge"
@@ -7,16 +7,12 @@ import { Button } from "@/components/ui/button"
 import {
   Card,
   CardContent,
-  CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card"
-import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Separator } from "@/components/ui/separator"
-import { Textarea } from "@/components/ui/textarea"
 import { FloatLabel } from "@/components/ui/float-label"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { Upload, CheckCircle2, ShieldCheck, FileText, CalendarRange, Wallet, Sparkles, Info, Loader2, X } from "lucide-react"
@@ -40,10 +36,6 @@ export default function ReimburseMyself({
 }: ReimburseMyselfProps) {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitted, setSubmitted] = useState(false)
-  const [hasReceipt, setHasReceipt] = useState(true)
-  const [notes, setNotes] = useState(
-    "Reimbursement request for a recent visit. Receipt and EOB attached for review."
-  )
   const [formData, setFormData] = useState({
     account: "",
     category: "",
@@ -218,9 +210,7 @@ export default function ReimburseMyself({
 
   const renderVision = () => {
     const isFSA = formData.account.includes("fsa")
-    const isHSA = formData.account === "hsa"
     const receiptRequired = isFSA && !manualEntryMode
-    const receiptOptional = isHSA
     const showFormFields = uploadedFile || manualEntryMode || isAnalyzing
 
     const isAutoFilled = (field: string) => autoFilledFields.has(field)
