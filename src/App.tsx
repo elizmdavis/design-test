@@ -20,7 +20,10 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import { Skeleton } from "@/components/ui/skeleton"
 import { Progress } from "@/components/ui/progress"
 import { Slider } from "@/components/ui/slider"
-import { ArrowLeft } from "lucide-react"
+import { FloatLabel } from "@/components/ui/float-label"
+import { SelectCard } from "@/components/ui/select-card"
+import { Stepper } from "@/components/ui/stepper"
+import { ArrowLeft, Mail, Eye, EyeOff, User, Lock, CreditCard, Smartphone, Laptop, Check } from "lucide-react"
 import Login from "@/pages/Login"
 import AdminCustomization from "@/pages/AdminCustomization"
 import Homepage from "@/pages/Homepage"
@@ -60,6 +63,10 @@ function App() {
   })
   const [progress, setProgress] = useState(33)
   const [sliderValue, setSliderValue] = useState([50])
+  const [showPassword, setShowPassword] = useState(false)
+  const [selectedPayment, setSelectedPayment] = useState("credit-card")
+  const [selectedDevices, setSelectedDevices] = useState<string[]>(["laptop"])
+  const [currentStepId, setCurrentStepId] = useState("step-2")
 
   // Sync authentication state with localStorage on mount (safety check)
   useEffect(() => {
@@ -361,6 +368,362 @@ function App() {
                   </SelectContent>
                 </Select>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* FloatLabel Inputs */}
+        <section className="space-y-4">
+          <div>
+            <h2 className="text-3xl font-bold tracking-tight">FloatLabel Inputs</h2>
+            <p className="text-muted-foreground">Floating label input fields with optional icons</p>
+          </div>
+          <Separator />
+          <div className="grid md:grid-cols-2 gap-6">
+            <div className="space-y-6">
+              <div>
+                <h3 className="text-xl font-semibold mb-3">Basic Examples</h3>
+                <div className="space-y-4">
+                  <FloatLabel label="Email Address" type="email" />
+                  <FloatLabel label="Full Name" type="text" defaultValue="John Doe" />
+                  <FloatLabel label="Phone Number" type="tel" />
+                </div>
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold mb-3">With Left Icon</h3>
+                <div className="space-y-4">
+                  <FloatLabel
+                    label="Email Address"
+                    type="email"
+                    leftIcon={<Mail className="h-4 w-4" />}
+                  />
+                  <FloatLabel
+                    label="Username"
+                    type="text"
+                    leftIcon={<User className="h-4 w-4" />}
+                  />
+                </div>
+              </div>
+            </div>
+            <div className="space-y-6">
+              <div>
+                <h3 className="text-xl font-semibold mb-3">With Right Icon</h3>
+                <div className="space-y-4">
+                  <FloatLabel
+                    label="Password"
+                    type={showPassword ? "text" : "password"}
+                    rightIcon={
+                      showPassword ? (
+                        <EyeOff className="h-4 w-4" />
+                      ) : (
+                        <Eye className="h-4 w-4" />
+                      )
+                    }
+                    onRightIconClick={() => setShowPassword(!showPassword)}
+                  />
+                </div>
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold mb-3">With Both Icons</h3>
+                <div className="space-y-4">
+                  <FloatLabel
+                    label="Password"
+                    type={showPassword ? "text" : "password"}
+                    leftIcon={<Lock className="h-4 w-4" />}
+                    rightIcon={
+                      showPassword ? (
+                        <EyeOff className="h-4 w-4" />
+                      ) : (
+                        <Eye className="h-4 w-4" />
+                      )
+                    }
+                    onRightIconClick={() => setShowPassword(!showPassword)}
+                  />
+                  <FloatLabel
+                    label="Email Address"
+                    type="email"
+                    leftIcon={<Mail className="h-4 w-4" />}
+                    rightIcon={<User className="h-4 w-4" />}
+                  />
+                </div>
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold mb-3">States</h3>
+                <div className="space-y-4">
+                  <FloatLabel label="Error State" type="text" error defaultValue="Invalid input" />
+                  <FloatLabel label="Disabled State" type="text" disabled defaultValue="Cannot edit" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Select Cards */}
+        <section className="space-y-4">
+          <div>
+            <h2 className="text-3xl font-bold tracking-tight">Select Cards</h2>
+            <p className="text-muted-foreground">Selectable card components with optional icons, subtitles, and actions</p>
+          </div>
+          <Separator />
+          <div className="space-y-8">
+            <div>
+              <h3 className="text-xl font-semibold mb-4">Radio Selection (Single Choice)</h3>
+              <div className="grid md:grid-cols-2 gap-4">
+                <SelectCard
+                  title="Credit Card"
+                  subtext="Pay securely with your credit or debit card"
+                  description="Processing fee: 2.9% + $0.30 per transaction"
+                  icon={<CreditCard className="h-6 w-6" />}
+                  selected={selectedPayment === "credit-card"}
+                  onSelectedChange={() => setSelectedPayment("credit-card")}
+                  selectionType="radio"
+                  value="credit-card"
+                />
+                <SelectCard
+                  title="Bank Transfer"
+                  subtext="Direct transfer from your bank account"
+                  description="No processing fees, takes 3-5 business days"
+                  icon={<Check className="h-6 w-6" />}
+                  selected={selectedPayment === "bank-transfer"}
+                  onSelectedChange={() => setSelectedPayment("bank-transfer")}
+                  selectionType="radio"
+                  value="bank-transfer"
+                />
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-semibold mb-4">Checkbox Selection (Multiple Choice)</h3>
+              <div className="grid md:grid-cols-2 gap-4">
+                <SelectCard
+                  title="Laptop"
+                  subtext="MacBook Pro 16-inch"
+                  description="M3 chip, 16GB RAM, 512GB SSD - Perfect for development"
+                  icon={<Laptop className="h-6 w-6" />}
+                  selected={selectedDevices.includes("laptop")}
+                  onSelectedChange={(selected) => {
+                    setSelectedDevices(prev =>
+                      selected
+                        ? [...prev, "laptop"]
+                        : prev.filter(d => d !== "laptop")
+                    )
+                  }}
+                  selectionType="checkbox"
+                />
+                <SelectCard
+                  title="Smartphone"
+                  subtext="iPhone 15 Pro"
+                  description="Advanced camera system, A17 Pro chip, titanium design"
+                  icon={<Smartphone className="h-6 w-6" />}
+                  selected={selectedDevices.includes("smartphone")}
+                  onSelectedChange={(selected) => {
+                    setSelectedDevices(prev =>
+                      selected
+                        ? [...prev, "smartphone"]
+                        : prev.filter(d => d !== "smartphone")
+                    )
+                  }}
+                  selectionType="checkbox"
+                />
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-semibold mb-4">With View Link</h3>
+              <div className="grid md:grid-cols-2 gap-4">
+                <SelectCard
+                  title="Premium Plan"
+                  subtext="Unlimited access"
+                  description="All features included: Analytics, Priority support, Custom integrations"
+                  selected={selectedPayment === "premium"}
+                  onSelectedChange={() => setSelectedPayment("premium")}
+                  selectionType="radio"
+                  value="premium"
+                  viewLabel="View Details"
+                  onViewClick={() => alert("View Premium Plan Details")}
+                />
+                <SelectCard
+                  title="Basic Plan"
+                  subtext="Essential features"
+                  description="Perfect for getting started: 5 projects, 100MB storage, Email support"
+                  selected={selectedPayment === "basic"}
+                  onSelectedChange={() => setSelectedPayment("basic")}
+                  selectionType="radio"
+                  value="basic"
+                  viewLabel="Learn More"
+                  viewHref="#basic-plan"
+                />
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-semibold mb-4">States</h3>
+              <div className="grid md:grid-cols-2 gap-4">
+                <SelectCard
+                  title="Disabled Card"
+                  subtext="Currently unavailable"
+                  description="This payment method is temporarily disabled"
+                  icon={<CreditCard className="h-6 w-6" />}
+                  selected={false}
+                  onSelectedChange={() => {}}
+                  selectionType="radio"
+                  disabled
+                />
+                <SelectCard
+                  title="Selected & Disabled"
+                  subtext="Cannot be changed"
+                  description="This option is locked and cannot be modified"
+                  icon={<Check className="h-6 w-6" />}
+                  selected={true}
+                  onSelectedChange={() => {}}
+                  selectionType="checkbox"
+                  disabled
+                />
+              </div>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-semibold mb-4">Minimal Variants</h3>
+              <div className="grid md:grid-cols-2 gap-4">
+                <SelectCard
+                  title="Simple Card"
+                  subtext="Only title and subtext"
+                  selected={false}
+                  onSelectedChange={() => {}}
+                  selectionType="radio"
+                />
+                <SelectCard
+                  title="With All Elements"
+                  subtext="Complete card example"
+                  description="This card shows title, subtext, description, icon, and selection"
+                  icon={<Mail className="h-6 w-6" />}
+                  selected={true}
+                  onSelectedChange={() => {}}
+                  selectionType="checkbox"
+                  viewLabel="View More"
+                  onViewClick={() => alert("View more clicked")}
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Stepper */}
+        <section className="space-y-4">
+          <div>
+            <h2 className="text-3xl font-bold tracking-tight">Stepper</h2>
+            <p className="text-muted-foreground">Progress visualization for multi-step processes</p>
+          </div>
+          <Separator />
+          <div className="grid md:grid-cols-2 gap-8">
+            <div>
+              <h3 className="text-xl font-semibold mb-4">Basic Stepper</h3>
+              <Card>
+                <CardContent className="p-6">
+                  <Stepper
+                    steps={[
+                      { id: "step-1", label: "Account Information", status: "completed" },
+                      { id: "step-2", label: "Personal Details", status: "current" },
+                      { id: "step-3", label: "Verification", status: "upcoming" },
+                      { id: "step-4", label: "Complete", status: "upcoming" },
+                    ]}
+                    currentStepId="step-2"
+                    onStepClick={(stepId) => console.log("Clicked step:", stepId)}
+                  />
+                </CardContent>
+              </Card>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-semibold mb-4">Interactive Stepper</h3>
+              <Card>
+                <CardContent className="p-6">
+                  <Stepper
+                    steps={[
+                      { id: "step-1", label: "Choose Plan", status: currentStepId === "step-1" ? "current" : "completed" },
+                      { id: "step-2", label: "Payment Method", status: currentStepId === "step-2" ? "current" : currentStepId === "step-1" ? "upcoming" : "completed" },
+                      { id: "step-3", label: "Confirmation", status: currentStepId === "step-3" ? "current" : "upcoming" },
+                    ]}
+                    currentStepId={currentStepId}
+                    onStepClick={(stepId) => {
+                      console.log("Navigate to:", stepId)
+                      setCurrentStepId(stepId)
+                    }}
+                  />
+                  <div className="mt-6 flex gap-2">
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      onClick={() => {
+                        if (currentStepId === "step-2") setCurrentStepId("step-1")
+                        if (currentStepId === "step-3") setCurrentStepId("step-2")
+                      }}
+                      disabled={currentStepId === "step-1"}
+                    >
+                      Previous
+                    </Button>
+                    <Button
+                      size="sm"
+                      onClick={() => {
+                        if (currentStepId === "step-1") setCurrentStepId("step-2")
+                        if (currentStepId === "step-2") setCurrentStepId("step-3")
+                      }}
+                      disabled={currentStepId === "step-3"}
+                    >
+                      Next
+                    </Button>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-semibold mb-4">With Substeps</h3>
+              <Card>
+                <CardContent className="p-6">
+                  <Stepper
+                    steps={[
+                      { id: "step-1", label: "Getting Started", status: "completed" },
+                      {
+                        id: "step-2",
+                        label: "Configuration",
+                        status: "current",
+                        substeps: [
+                          { id: "step-2-1", label: "Basic Settings", status: "completed" },
+                          { id: "step-2-2", label: "Advanced Options", status: "current" },
+                          { id: "step-2-3", label: "Review", status: "upcoming" },
+                        ],
+                      },
+                      { id: "step-3", label: "Deployment", status: "upcoming" },
+                      { id: "step-4", label: "Go Live", status: "upcoming" },
+                    ]}
+                    currentStepId="step-2"
+                    onStepClick={(stepId) => console.log("Clicked:", stepId)}
+                  />
+                </CardContent>
+              </Card>
+            </div>
+
+            <div>
+              <h3 className="text-xl font-semibold mb-4">Long Process</h3>
+              <Card>
+                <CardContent className="p-6 max-h-96 overflow-y-auto">
+                  <Stepper
+                    steps={[
+                      { id: "step-1", label: "Create Account", status: "completed" },
+                      { id: "step-2", label: "Verify Email", status: "completed" },
+                      { id: "step-3", label: "Add Profile Photo", status: "completed" },
+                      { id: "step-4", label: "Set Preferences", status: "current" },
+                      { id: "step-5", label: "Connect Services", status: "upcoming" },
+                      { id: "step-6", label: "Invite Team", status: "upcoming" },
+                      { id: "step-7", label: "Final Review", status: "upcoming" },
+                      { id: "step-8", label: "Launch", status: "upcoming" },
+                    ]}
+                    currentStepId="step-4"
+                    onStepClick={(stepId) => console.log("Navigate:", stepId)}
+                  />
+                </CardContent>
+              </Card>
             </div>
           </div>
         </section>
