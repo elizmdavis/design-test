@@ -20,7 +20,7 @@ export default function Login({ onLoginSuccess }: LoginProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white to-[#ececec] relative overflow-hidden">
+    <div className="min-h-screen bg-[#F1FAFE] relative overflow-hidden">
       {/* Background decorative elements - simplified version */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Decorative circles/squares would go here - simplified for now */}

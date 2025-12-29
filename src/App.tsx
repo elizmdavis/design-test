@@ -146,6 +146,7 @@ function App() {
         onNavigate={handleNavigate}
         onNavigateToMyProfile={handleNavigateToMyProfile}
         onNavigateToAdmin={handleNavigateToAdmin}
+        onNavigateToMessageCenter={() => updatePage("messagecenter")}
         onLogout={handleLogout}
       />
     )
@@ -158,6 +159,7 @@ function App() {
         onNavigate={handleNavigate}
         onNavigateToMyProfile={handleNavigateToMyProfile}
         onNavigateToAdmin={handleNavigateToAdmin}
+        onNavigateToMessageCenter={() => updatePage("messagecenter")}
         onLogout={handleLogout}
       />
     )
@@ -197,6 +199,7 @@ function App() {
         onNavigate={handleNavigate}
         onNavigateToMyProfile={handleNavigateToMyProfile}
         onNavigateToAdmin={handleNavigateToAdmin}
+        onNavigateToMessageCenter={() => updatePage("messagecenter")}
         onLogout={handleLogout}
       />
     )
@@ -209,6 +212,7 @@ function App() {
         onNavigate={handleNavigate}
         onNavigateToMyProfile={handleNavigateToMyProfile}
         onNavigateToAdmin={handleNavigateToAdmin}
+        onNavigateToMessageCenter={() => updatePage("messagecenter")}
         onLogout={handleLogout}
       />
     )
@@ -221,6 +225,7 @@ function App() {
         onNavigate={handleNavigate}
         onNavigateToMyProfile={handleNavigateToMyProfile}
         onNavigateToAdmin={handleNavigateToAdmin}
+        onNavigateToMessageCenter={() => updatePage("messagecenter")}
         onLogout={handleLogout}
       />
     )
@@ -233,6 +238,7 @@ function App() {
         onNavigate={handleNavigate}
         onNavigateToMyProfile={handleNavigateToMyProfile}
         onNavigateToAdmin={handleNavigateToAdmin}
+        onNavigateToMessageCenter={() => updatePage("messagecenter")}
         onLogout={handleLogout}
       />
     )
@@ -245,6 +251,7 @@ function App() {
         onNavigate={handleNavigate}
         onNavigateToMyProfile={handleNavigateToMyProfile}
         onNavigateToAdmin={handleNavigateToAdmin}
+        onNavigateToMessageCenter={() => updatePage("messagecenter")}
         onLogout={handleLogout}
       />
     )

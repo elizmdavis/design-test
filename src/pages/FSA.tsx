@@ -5,6 +5,7 @@ interface FSAProps {
   onNavigate: (page: string) => void
   onNavigateToMyProfile: () => void
   onNavigateToAdmin: () => void
+  onNavigateToMessageCenter?: () => void
   onLogout: () => void
 }
 
@@ -13,10 +14,11 @@ export default function FSA({
   onNavigate,
   onNavigateToMyProfile,
   onNavigateToAdmin,
+  onNavigateToMessageCenter,
   onLogout,
 }: FSAProps) {
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-[#F1FAFE]">
       <Navigation
         currentPage={currentPage}
         onNavigate={onNavigate}
@@ -31,6 +33,7 @@ export default function FSA({
           onNavigateToMyProfile()
         }}
         onNavigateToAdmin={onNavigateToAdmin}
+        onNavigateToMessageCenter={onNavigateToMessageCenter}
         onLogout={onLogout}
       />
       <div className="mx-auto max-w-[1440px] px-8 py-8">

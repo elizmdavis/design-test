@@ -169,7 +169,7 @@ export default function MessageCenter({
   ]
 
   return (
-    <div className="min-h-screen bg-[#f1fafe]">
+    <div className="min-h-screen bg-[#F1FAFE]">
       {/* Navigation Bar */}
       <Navigation
         currentPage={currentPage}

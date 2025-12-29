@@ -157,7 +157,11 @@ export default function Navigation({
               variant="ghost"
               size="icon"
               className="relative h-11 w-11"
-              onClick={onNavigateToMessageCenter}
+              onClick={() => {
+                if (onNavigateToMessageCenter) {
+                  onNavigateToMessageCenter()
+                }
+              }}
             >
               <Bell className="h-4 w-4 text-[#243746]" />
               <Badge className="absolute right-2 top-2 h-4 w-4 rounded-full bg-[#d23f57] p-0 text-[10px] font-bold leading-4 text-white">

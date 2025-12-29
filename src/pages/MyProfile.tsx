@@ -19,6 +19,7 @@ interface MyProfileProps {
   onNavigate: (page: string) => void
   onNavigateToMyProfile: () => void
   onNavigateToAdmin: () => void
+  onNavigateToMessageCenter?: () => void
   onLogout: () => void
 }
 
@@ -29,6 +30,7 @@ export default function MyProfile({
   onNavigate,
   onNavigateToMyProfile,
   onNavigateToAdmin,
+  onNavigateToMessageCenter,
   onLogout,
 }: MyProfileProps) {
   const [activeSubPage, setActiveSubPage] = useState<SubPage>(() => {
@@ -432,7 +434,7 @@ export default function MyProfile({
   }
 
   return (
-    <div className="min-h-screen bg-blue-50">
+    <div className="min-h-screen bg-[#F1FAFE]">
       <Navigation
         currentPage={currentPage}
         onNavigate={onNavigate}
@@ -450,6 +452,7 @@ export default function MyProfile({
           onNavigateToMyProfile()
         }}
         onNavigateToAdmin={onNavigateToAdmin}
+        onNavigateToMessageCenter={onNavigateToMessageCenter}
         onLogout={onLogout}
       />
 
