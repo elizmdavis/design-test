@@ -119,6 +119,17 @@ function App() {
     updatePage("myprofile")
   }
 
+  const handleNavigateToMyProfileWithSubPage = (subPage: string) => {
+    try {
+      localStorage.setItem("myProfileSubPage", subPage)
+      // Dispatch custom event to trigger state update in MyProfile component
+      window.dispatchEvent(new Event("myProfileSubPageChange"))
+    } catch (error) {
+      console.warn("Failed to save myProfileSubPage to localStorage:", error)
+    }
+    updatePage("myprofile")
+  }
+
   const handleNavigateToAdmin = () => {
     updatePage("admin")
   }
