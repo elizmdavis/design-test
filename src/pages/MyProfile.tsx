@@ -2,7 +2,7 @@ import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import Navigation from "@/components/Navigation"
-import { Pencil, Info, Users, Heart, Building2, CreditCard, Shield, Mail, Plus } from "lucide-react"
+import { Pencil, Info, Plus } from "lucide-react"
 import emptyIllustration from "@/assets/empty-state-illustration.svg"
 
 interface MyProfileProps {
@@ -228,10 +228,7 @@ export default function MyProfile({
           <>
             <div className="border-b border-gray-200 p-4">
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <Users className="h-6 w-6 text-gray-600" />
-                  <h2 className="text-2xl font-semibold text-gray-800">Dependents</h2>
-                </div>
+                <h2 className="text-2xl font-semibold text-gray-800">Dependents</h2>
                 <Button
                   variant="outline"
                   className="border-[#0058a3] text-[#0058a3] hover:bg-blue-50"
@@ -259,18 +256,18 @@ export default function MyProfile({
           <>
             <div className="border-b border-gray-200 p-4">
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <Heart className="h-6 w-6 text-gray-600" />
-                  <h2 className="text-2xl font-semibold text-gray-800">Beneficiaries</h2>
-                </div>
-                <Button className="bg-blue-600 hover:bg-blue-700">
+                <h2 className="text-2xl font-semibold text-gray-800">Beneficiaries</h2>
+                <Button
+                  variant="outline"
+                  className="border-[#0058a3] text-[#0058a3] hover:bg-blue-50"
+                >
                   <Plus className="mr-2 h-4 w-4" />
                   Add Beneficiary
                 </Button>
               </div>
             </div>
             <div className="p-6">
-              <div className="flex flex-col items-center justify-center rounded-lg border border-gray-200 bg-gray-50 p-8">
+              <div className="flex flex-col items-center justify-center rounded-lg p-8">
                 <img
                   src={emptyIllustration}
                   alt="Empty beneficiaries illustration"
@@ -289,18 +286,18 @@ export default function MyProfile({
           <>
             <div className="border-b border-gray-200 p-4">
               <div className="flex items-center justify-between">
-                <div className="flex items-center gap-3">
-                  <Building2 className="h-6 w-6 text-gray-600" />
-                  <h2 className="text-2xl font-semibold text-gray-800">Banking</h2>
-                </div>
-                <Button className="bg-blue-600 hover:bg-blue-700">
+                <h2 className="text-2xl font-semibold text-gray-800">Banking</h2>
+                <Button
+                  variant="outline"
+                  className="border-[#0058a3] text-[#0058a3] hover:bg-blue-50"
+                >
                   <Plus className="mr-2 h-4 w-4" />
                   Add Bank Account
                 </Button>
               </div>
             </div>
             <div className="p-6">
-              <div className="flex flex-col items-center justify-center rounded-lg border border-gray-200 bg-gray-50 p-8">
+              <div className="flex flex-col items-center justify-center rounded-lg p-8">
                 <img
                   src={emptyIllustration}
                   alt="Empty banking illustration"
@@ -318,13 +315,12 @@ export default function MyProfile({
         return (
           <>
             <div className="border-b border-gray-200 p-4">
-              <div className="flex items-center gap-3">
-                <CreditCard className="h-6 w-6 text-gray-600" />
+              <div className="flex items-center">
                 <h2 className="text-2xl font-semibold text-gray-800">Debit Card</h2>
               </div>
             </div>
             <div className="p-6">
-              <div className="flex flex-col items-center justify-center rounded-lg border border-gray-200 bg-gray-50 p-8">
+              <div className="flex flex-col items-center justify-center rounded-lg p-8">
                 <img
                   src={emptyIllustration}
                   alt="Empty debit card illustration"
@@ -342,8 +338,7 @@ export default function MyProfile({
         return (
           <>
             <div className="border-b border-gray-200 p-4">
-              <div className="flex items-center gap-3">
-                <Shield className="h-6 w-6 text-gray-600" />
+              <div className="flex items-center">
                 <h2 className="text-2xl font-semibold text-gray-800">Login & Security</h2>
               </div>
             </div>
@@ -386,8 +381,7 @@ export default function MyProfile({
         return (
           <>
             <div className="border-b border-gray-200 p-4">
-              <div className="flex items-center gap-3">
-                <Mail className="h-6 w-6 text-gray-600" />
+              <div className="flex items-center">
                 <h2 className="text-2xl font-semibold text-gray-800">Communication Preferences</h2>
               </div>
             </div>

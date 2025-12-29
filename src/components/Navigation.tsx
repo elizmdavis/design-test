@@ -4,23 +4,7 @@ import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import WexLogo from "@/assets/wex-logo.svg"
-import {
-  Home,
-  Wallet,
-  FileText,
-  LifeBuoy,
-  ChevronDown,
-  Globe,
-  Bell,
-  User,
-  Users,
-  Heart,
-  CreditCard,
-  Shield,
-  Mail,
-  LogOut,
-  Settings,
-} from "lucide-react"
+import { Home, Wallet, FileText, LifeBuoy, ChevronDown, Globe, Bell, User, LogOut, Settings } from "lucide-react"
 
 interface NavigationProps {
   currentPage: string
@@ -195,62 +179,55 @@ export default function Navigation({
 
                   {/* Menu Items */}
                   <div className="space-y-0">
-                    <Button
-                      variant="ghost"
-                      className="w-full justify-start bg-blue-50 text-blue-700 hover:bg-blue-100"
-                      onClick={() => handleProfileNavigation("my-profile")}
-                    >
-                      <User className="mr-2 h-4 w-4" />
-                      My Profile
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      className="w-full justify-start"
-                      onClick={() => handleProfileNavigation("dependents")}
-                    >
-                      <Users className="mr-2 h-4 w-4" />
-                      Dependents
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      className="w-full justify-start"
-                      onClick={() => handleProfileNavigation("beneficiaries")}
-                    >
-                      <Heart className="mr-2 h-4 w-4" />
-                      Beneficiaries
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      className="w-full justify-start"
-                      onClick={() => handleProfileNavigation("banking")}
-                    >
-                      <CreditCard className="mr-2 h-4 w-4" />
-                      Banking
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      className="w-full justify-start"
-                      onClick={() => handleProfileNavigation("debit-card")}
-                    >
-                      <CreditCard className="mr-2 h-4 w-4" />
-                      Debit Card
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      className="w-full justify-start"
-                      onClick={() => handleProfileNavigation("login-security")}
-                    >
-                      <Shield className="mr-2 h-4 w-4" />
-                      Login and Security
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      className="w-full justify-start"
-                      onClick={() => handleProfileNavigation("communication")}
-                    >
-                      <Mail className="mr-2 h-4 w-4" />
-                      Communication Preferences
-                    </Button>
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start bg-blue-50 text-blue-700 hover:bg-blue-100"
+                    onClick={() => handleProfileNavigation("my-profile")}
+                  >
+                    My Profile
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start"
+                    onClick={() => handleProfileNavigation("dependents")}
+                  >
+                    Dependents
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start"
+                    onClick={() => handleProfileNavigation("beneficiaries")}
+                  >
+                    Beneficiaries
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start"
+                    onClick={() => handleProfileNavigation("banking")}
+                  >
+                    Banking
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start"
+                    onClick={() => handleProfileNavigation("debit-card")}
+                  >
+                    Debit Card
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start"
+                    onClick={() => handleProfileNavigation("login-security")}
+                  >
+                    Login and Security
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start"
+                    onClick={() => handleProfileNavigation("communication")}
+                  >
+                    Communication Preferences
+                  </Button>
                   </div>
 
                   <Separator className="my-2" />
