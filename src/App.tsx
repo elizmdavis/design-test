@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -36,10 +36,31 @@ import FSA from "@/pages/FSA"
 import MessageCenter from "@/pages/MessageCenter"
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  // Initialize authentication state from localStorage
+  const [isAuthenticated, setIsAuthenticated] = useState(() => {
+    try {
+      const stored = localStorage.getItem("isAuthenticated")
+      return stored === "true"
+    } catch {
+      return false
+    }
+  })
+  
+  // Initialize current page from localStorage, default to "homepage"
   const [currentPage, setCurrentPage] = useState<
     "showcase" | "admin" | "homepage" | "myprofile" | "accounts" | "claims" | "resources" | "hsa" | "fsa" | "messagecenter"
-  >("homepage")
+  >(() => {
+    try {
+      const stored = localStorage.getItem("currentPage")
+      const validPages = ["showcase", "admin", "homepage", "myprofile", "accounts", "claims", "resources", "hsa", "fsa", "messagecenter"]
+      if (stored && validPages.includes(stored)) {
+        return stored as typeof currentPage
+      }
+    } catch {
+      // Ignore errors
+    }
+    return "homepage"
+  })
   const [progress, setProgress] = useState(33)
   const [sliderValue, setSliderValue] = useState([50])
   const [showPassword, setShowPassword] = useState(false)
@@ -47,25 +68,66 @@ function App() {
   const [selectedDevices, setSelectedDevices] = useState<string[]>(["laptop"])
   const [currentStepId, setCurrentStepId] = useState("step-2")
 
+  // Sync authentication state with localStorage on mount (safety check)
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem("isAuthenticated")
+      if (stored === "true") {
+        setIsAuthenticated(true)
+      }
+    } catch (error) {
+      console.warn("Failed to read from localStorage:", error)
+    }
+  }, [])
+
+  // Helper function to update page and save to localStorage
+  const updatePage = (page: typeof currentPage) => {
+    setCurrentPage(page)
+    try {
+      localStorage.setItem("currentPage", page)
+    } catch (error) {
+      console.warn("Failed to save currentPage to localStorage:", error)
+    }
+  }
+
   const handleLogin = () => {
-    setIsAuthenticated(true)
-    setCurrentPage("homepage")
+    try {
+      localStorage.setItem("isAuthenticated", "true")
+      setIsAuthenticated(true)
+      // Restore the last page or default to homepage
+      const savedPage = localStorage.getItem("currentPage")
+      const pageToSet = (savedPage || "homepage") as typeof currentPage
+      updatePage(pageToSet)
+    } catch (error) {
+      console.warn("Failed to save to localStorage:", error)
+      // Still set the state even if localStorage fails
+      setIsAuthenticated(true)
+      setCurrentPage("homepage")
+    }
   }
 
   const handleLogout = () => {
-    setIsAuthenticated(false)
+    try {
+      localStorage.removeItem("isAuthenticated")
+      setIsAuthenticated(false)
+    } catch (error) {
+      console.warn("Failed to remove from localStorage:", error)
+      // Still set the state even if localStorage fails
+      setIsAuthenticated(false)
+    }
   }
 
   const handleNavigate = (page: string) => {
-    setCurrentPage(page as typeof currentPage)
+    const pageValue = page as typeof currentPage
+    updatePage(pageValue)
   }
 
   const handleNavigateToMyProfile = () => {
-    setCurrentPage("myprofile")
+    updatePage("myprofile")
   }
 
   const handleNavigateToAdmin = () => {
-    setCurrentPage("admin")
+    updatePage("admin")
   }
 
   // Show login page if not authenticated
@@ -105,7 +167,7 @@ function App() {
         onNavigateToMyProfile={handleNavigateToMyProfile}
         onNavigateToAdmin={handleNavigateToAdmin}
         onLogout={handleLogout}
-        onBack={() => setCurrentPage("homepage")}
+        onBack={() => updatePage("homepage")}
       />
     )
   }
@@ -116,9 +178,9 @@ function App() {
         currentPage={currentPage}
         onNavigate={handleNavigate}
         onNavigateToAdmin={handleNavigateToAdmin}
-        onNavigateToShowcase={() => setCurrentPage("showcase")}
+        onNavigateToShowcase={() => updatePage("showcase")}
         onNavigateToMyProfile={handleNavigateToMyProfile}
-        onNavigateToMessageCenter={() => setCurrentPage("messagecenter")}
+        onNavigateToMessageCenter={() => updatePage("messagecenter")}
         onLogout={handleLogout}
       />
     )
@@ -191,7 +253,7 @@ function App() {
         <div className="container mx-auto px-8 py-7">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-4">
-              <Button variant="ghost" size="icon" onClick={() => setCurrentPage("homepage")}>
+              <Button variant="ghost" size="icon" onClick={() => updatePage("homepage")}>
                 <ArrowLeft className="h-5 w-5" />
               </Button>
               <div>

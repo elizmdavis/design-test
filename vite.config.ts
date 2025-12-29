@@ -14,5 +14,5 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
-  base: '/design-test/',
+  // base: '/design-test/', // Commented out for local development - uncomment for GitHub Pages deployment
 })
