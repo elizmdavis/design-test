@@ -1,18 +1,9 @@
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
+import { Alert, AlertDescription } from "@/components/ui/alert"
 import Navigation from "@/components/Navigation"
-import {
-  ArrowLeft,
-  Pencil,
-  Info,
-  Users,
-  Heart,
-  Building2,
-  CreditCard,
-  Shield,
-  Mail,
-  Plus,
-} from "lucide-react"
+import { Pencil, Info, Users, Heart, Building2, CreditCard, Shield, Mail, Plus } from "lucide-react"
+import emptyIllustration from "@/assets/empty-state-illustration.svg"
 
 interface MyProfileProps {
   currentPage: string
@@ -33,6 +24,17 @@ export default function MyProfile({
   onNavigateToMessageCenter,
   onLogout,
 }: MyProfileProps) {
+  const personalName = "Emily Rose Smith"
+
+  const getInitials = (name: string) => {
+    const parts = name.trim().split(/\s+/).filter(Boolean)
+    if (parts.length === 0) return ""
+    if (parts.length === 1) return parts[0].slice(0, 2).toUpperCase()
+    const first = parts[0][0] || ""
+    const last = parts[parts.length - 1][0] || ""
+    return `${first}${last}`.toUpperCase()
+  }
+
   const [activeSubPage, setActiveSubPage] = useState<SubPage>(() => {
     try {
       const stored = localStorage.getItem("myProfileSubPage")
@@ -107,22 +109,20 @@ export default function MyProfile({
             <div className="border-b border-gray-200 p-4">
               <div className="flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-200">
-                  <span className="text-base font-medium">EM</span>
+                    <span className="text-base font-medium">{getInitials(personalName)}</span>
                 </div>
                 <h2 className="text-2xl font-semibold text-gray-800">My profile</h2>
               </div>
             </div>
 
             {/* Info Banner */}
-            <div className="border-b border-blue-200 bg-blue-50 p-4">
-              <div className="flex items-start gap-2">
-                <Info className="mt-0.5 h-4 w-4 text-blue-600" />
-                <p className="flex-1 text-sm text-blue-700">
-                  Certain profile information is managed by your organization to keep records
-                  consistent and secure. If you notice something incorrect or need an update,{" "}
-                  <span className="font-semibold">please contact your administrator.</span>
-                </p>
-              </div>
+            <div className="border-b border-gray-200 px-6 py-6">
+              <Alert className="border border-[#bfdbfe] bg-[rgba(239,246,255,0.95)] shadow-[0px_4px_8px_0px_rgba(2,5,10,0.04)] rounded-md px-[10.5px] py-[7px] [&>svg]:h-4 [&>svg]:w-4 gap-[7px]">
+                <Info className="h-4 w-4 text-[#0058a3]" />
+                <AlertDescription className="text-[#0058a3] text-base leading-6 tracking-[-0.176px] m-0 whitespace-normal inline">
+                  Certain profile information is managed by your organization to keep records consistent and secure. If you notice something incorrect or need an update, please contact your administrator.
+                </AlertDescription>
+              </Alert>
             </div>
 
             <div className="space-y-0">
@@ -137,7 +137,7 @@ export default function MyProfile({
                 </div>
                 <div className="space-y-2">
                   <div>
-                    <p className="text-sm font-medium text-gray-800">Emily Rose Smith</p>
+                      <p className="text-sm font-medium text-gray-800">{personalName}</p>
                   </div>
                   <div className="flex gap-1.5 text-sm">
                     <span className="text-gray-500">Date of birth:</span>
@@ -232,18 +232,24 @@ export default function MyProfile({
                   <Users className="h-6 w-6 text-gray-600" />
                   <h2 className="text-2xl font-semibold text-gray-800">Dependents</h2>
                 </div>
-                <Button className="bg-blue-600 hover:bg-blue-700">
+                <Button
+                  variant="outline"
+                  className="border-[#0058a3] text-[#0058a3] hover:bg-blue-50"
+                >
                   <Plus className="mr-2 h-4 w-4" />
-                  Add Dependent
+                  Add New Dependent
                 </Button>
               </div>
             </div>
-            <div className="p-6">
-              <div className="rounded-lg border border-gray-200 bg-gray-50 p-8 text-center">
-                <Users className="mx-auto h-12 w-12 text-gray-400 mb-4" />
-                <p className="text-gray-600 mb-2">No dependents added yet</p>
-                <p className="text-sm text-gray-500">Add a dependent to get started</p>
-              </div>
+            <div className="flex flex-col items-center justify-center px-8 py-16">
+              <img
+                src={emptyIllustration}
+                alt="Empty dependents illustration"
+                className="h-56 w-auto"
+              />
+              <p className="mt-6 text-center text-base text-gray-700">
+                You have no dependents added yet
+              </p>
             </div>
           </>
         )
@@ -264,10 +270,15 @@ export default function MyProfile({
               </div>
             </div>
             <div className="p-6">
-              <div className="rounded-lg border border-gray-200 bg-gray-50 p-8 text-center">
-                <Heart className="mx-auto h-12 w-12 text-gray-400 mb-4" />
-                <p className="text-gray-600 mb-2">No beneficiaries added yet</p>
-                <p className="text-sm text-gray-500">Add a beneficiary to get started</p>
+              <div className="flex flex-col items-center justify-center rounded-lg border border-gray-200 bg-gray-50 p-8">
+                <img
+                  src={emptyIllustration}
+                  alt="Empty beneficiaries illustration"
+                  className="h-56 w-auto"
+                />
+                <p className="mt-6 text-center text-base text-gray-700">
+                  You have no beneficiaries added yet
+                </p>
               </div>
             </div>
           </>
@@ -289,10 +300,15 @@ export default function MyProfile({
               </div>
             </div>
             <div className="p-6">
-              <div className="rounded-lg border border-gray-200 bg-gray-50 p-8 text-center">
-                <Building2 className="mx-auto h-12 w-12 text-gray-400 mb-4" />
-                <p className="text-gray-600 mb-2">No bank accounts added yet</p>
-                <p className="text-sm text-gray-500">Add a bank account to get started</p>
+              <div className="flex flex-col items-center justify-center rounded-lg border border-gray-200 bg-gray-50 p-8">
+                <img
+                  src={emptyIllustration}
+                  alt="Empty banking illustration"
+                  className="h-56 w-auto"
+                />
+                <p className="mt-6 text-center text-base text-gray-700">
+                  You have no bank accounts added yet
+                </p>
               </div>
             </div>
           </>
@@ -308,10 +324,15 @@ export default function MyProfile({
               </div>
             </div>
             <div className="p-6">
-              <div className="rounded-lg border border-gray-200 bg-gray-50 p-8 text-center">
-                <CreditCard className="mx-auto h-12 w-12 text-gray-400 mb-4" />
-                <p className="text-gray-600 mb-2">No debit card information available</p>
-                <p className="text-sm text-gray-500">Contact support to set up your debit card</p>
+              <div className="flex flex-col items-center justify-center rounded-lg border border-gray-200 bg-gray-50 p-8">
+                <img
+                  src={emptyIllustration}
+                  alt="Empty debit card illustration"
+                  className="h-56 w-auto"
+                />
+                <p className="mt-6 text-center text-base text-gray-700">
+                  No debit card information available
+                </p>
               </div>
             </div>
           </>
@@ -460,10 +481,7 @@ export default function MyProfile({
       <div className="mx-auto max-w-[1440px] px-8 py-8">
         <div className="mx-auto max-w-[1376px]">
           {/* Page Header */}
-          <div className="mb-8 flex items-center gap-4">
-            <Button variant="ghost" size="icon" onClick={() => onNavigate("homepage")}>
-              <ArrowLeft className="h-5 w-5" />
-            </Button>
+          <div className="mb-8 flex items-center">
             <h1 className="text-2xl font-semibold text-gray-800">My Account</h1>
           </div>
 
