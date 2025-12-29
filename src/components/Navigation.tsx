@@ -1,30 +1,16 @@
+import { useState } from "react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import WexLogo from "@/assets/wex-logo.svg"
-import {
-  Home,
-  Wallet,
-  FileText,
-  LifeBuoy,
-  ChevronDown,
-  Globe,
-  Bell,
-  User,
-  Users,
-  Heart,
-  CreditCard,
-  Shield,
-  Mail,
-  LogOut,
-  Settings,
-} from "lucide-react"
+import { Home, Wallet, FileText, LifeBuoy, ChevronDown, Globe, Bell, User, LogOut, Settings } from "lucide-react"
 
 interface NavigationProps {
   currentPage: string
   onNavigate: (page: string) => void
   onNavigateToMyProfile: () => void
+  onNavigateToMyProfileWithSubPage?: (subPage: string) => void
   onNavigateToAdmin: () => void
   onNavigateToMessageCenter?: () => void
   onLogout: () => void
@@ -34,14 +20,25 @@ export default function Navigation({
   currentPage,
   onNavigate,
   onNavigateToMyProfile,
+  onNavigateToMyProfileWithSubPage,
   onNavigateToAdmin,
   onNavigateToMessageCenter,
   onLogout,
 }: NavigationProps) {
+  const [profilePopoverOpen, setProfilePopoverOpen] = useState(false)
   const isHomeActive = currentPage === "homepage"
   const isAccountsActive = currentPage === "accounts" || currentPage === "hsa" || currentPage === "fsa"
   const isClaimsActive = currentPage === "claims"
   const isResourcesActive = currentPage === "resources"
+
+  const handleProfileNavigation = (subPage: string) => {
+    setProfilePopoverOpen(false)
+    if (onNavigateToMyProfileWithSubPage) {
+      onNavigateToMyProfileWithSubPage(subPage)
+    } else {
+      onNavigateToMyProfile()
+    }
+  }
 
   return (
     <nav className="border-b bg-white">
@@ -144,7 +141,11 @@ export default function Navigation({
               variant="ghost"
               size="icon"
               className="relative h-11 w-11"
-              onClick={onNavigateToMessageCenter}
+              onClick={() => {
+                if (onNavigateToMessageCenter) {
+                  onNavigateToMessageCenter()
+                }
+              }}
             >
               <Bell className="h-4 w-4 text-[#243746]" />
               <Badge className="absolute right-2 top-2 h-4 w-4 rounded-full bg-[#d23f57] p-0 text-[10px] font-bold leading-4 text-white">
@@ -152,7 +153,7 @@ export default function Navigation({
               </Badge>
             </Button>
             <Separator orientation="vertical" className="h-11" />
-            <Popover>
+            <Popover open={profilePopoverOpen} onOpenChange={setProfilePopoverOpen}>
               <PopoverTrigger asChild>
                 <Button variant="ghost" size="icon" className="h-11 w-11">
                   <div className="relative h-6 w-6">
@@ -178,38 +179,55 @@ export default function Navigation({
 
                   {/* Menu Items */}
                   <div className="space-y-0">
-                    <Button
-                      variant="ghost"
-                      className="w-full justify-start bg-blue-50 text-blue-700 hover:bg-blue-100"
-                      onClick={onNavigateToMyProfile}
-                    >
-                      <User className="mr-2 h-4 w-4" />
-                      My Profile
-                    </Button>
-                    <Button variant="ghost" className="w-full justify-start">
-                      <Users className="mr-2 h-4 w-4" />
-                      Dependents
-                    </Button>
-                    <Button variant="ghost" className="w-full justify-start">
-                      <Heart className="mr-2 h-4 w-4" />
-                      Beneficiaries
-                    </Button>
-                    <Button variant="ghost" className="w-full justify-start">
-                      <CreditCard className="mr-2 h-4 w-4" />
-                      Banking
-                    </Button>
-                    <Button variant="ghost" className="w-full justify-start">
-                      <CreditCard className="mr-2 h-4 w-4" />
-                      Debit Card
-                    </Button>
-                    <Button variant="ghost" className="w-full justify-start">
-                      <Shield className="mr-2 h-4 w-4" />
-                      Login and Security
-                    </Button>
-                    <Button variant="ghost" className="w-full justify-start">
-                      <Mail className="mr-2 h-4 w-4" />
-                      Communication Preferences
-                    </Button>
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start bg-blue-50 text-blue-700 hover:bg-blue-100"
+                    onClick={() => handleProfileNavigation("my-profile")}
+                  >
+                    My Profile
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start"
+                    onClick={() => handleProfileNavigation("dependents")}
+                  >
+                    Dependents
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start"
+                    onClick={() => handleProfileNavigation("beneficiaries")}
+                  >
+                    Beneficiaries
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start"
+                    onClick={() => handleProfileNavigation("banking")}
+                  >
+                    Banking
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start"
+                    onClick={() => handleProfileNavigation("debit-card")}
+                  >
+                    Debit Card
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start"
+                    onClick={() => handleProfileNavigation("login-security")}
+                  >
+                    Login and Security
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start"
+                    onClick={() => handleProfileNavigation("communication")}
+                  >
+                    Communication Preferences
+                  </Button>
                   </div>
 
                   <Separator className="my-2" />

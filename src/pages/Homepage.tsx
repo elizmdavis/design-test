@@ -102,11 +102,20 @@ export default function Homepage({
   ]
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-[#F1FAFE]">
       <Navigation
         currentPage={currentPage}
         onNavigate={onNavigate}
         onNavigateToMyProfile={onNavigateToMyProfile}
+        onNavigateToMyProfileWithSubPage={(subPage) => {
+          try {
+            localStorage.setItem("myProfileSubPage", subPage)
+            window.dispatchEvent(new Event("myProfileSubPageChange"))
+          } catch {
+            // Ignore errors
+          }
+          onNavigateToMyProfile()
+        }}
         onNavigateToAdmin={onNavigateToAdmin}
         onNavigateToMessageCenter={onNavigateToMessageCenter}
         onLogout={onLogout}

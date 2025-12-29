@@ -169,12 +169,21 @@ export default function MessageCenter({
   ]
 
   return (
-    <div className="min-h-screen bg-[#f1fafe]">
+    <div className="min-h-screen bg-[#F1FAFE]">
       {/* Navigation Bar */}
       <Navigation
         currentPage={currentPage}
         onNavigate={onNavigate}
         onNavigateToMyProfile={onNavigateToMyProfile}
+        onNavigateToMyProfileWithSubPage={(subPage) => {
+          try {
+            localStorage.setItem("myProfileSubPage", subPage)
+            window.dispatchEvent(new Event("myProfileSubPageChange"))
+          } catch {
+            // Ignore errors
+          }
+          onNavigateToMyProfile()
+        }}
         onNavigateToAdmin={onNavigateToAdmin}
         onLogout={onLogout}
       />

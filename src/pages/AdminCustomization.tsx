@@ -24,6 +24,7 @@ interface AdminCustomizationProps {
   onNavigate: (page: string) => void
   onNavigateToMyProfile: () => void
   onNavigateToAdmin: () => void
+  onNavigateToMessageCenter?: () => void
   onLogout: () => void
 }
 
@@ -32,6 +33,7 @@ export default function AdminCustomization({
   onNavigate,
   onNavigateToMyProfile,
   onNavigateToAdmin,
+  onNavigateToMessageCenter,
   onLogout,
 }: AdminCustomizationProps) {
   const [brandColors, setBrandColors] = useState<BrandColor[]>([
@@ -75,12 +77,22 @@ export default function AdminCustomization({
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-[#F1FAFE]">
       <Navigation
         currentPage={currentPage}
         onNavigate={onNavigate}
         onNavigateToMyProfile={onNavigateToMyProfile}
+        onNavigateToMyProfileWithSubPage={(subPage) => {
+          try {
+            localStorage.setItem("myProfileSubPage", subPage)
+            window.dispatchEvent(new Event("myProfileSubPageChange"))
+          } catch {
+            // Ignore errors
+          }
+          onNavigateToMyProfile()
+        }}
         onNavigateToAdmin={onNavigateToAdmin}
+        onNavigateToMessageCenter={onNavigateToMessageCenter}
         onLogout={onLogout}
       />
       {/* Header */}
