@@ -107,6 +107,15 @@ export default function Homepage({
         currentPage={currentPage}
         onNavigate={onNavigate}
         onNavigateToMyProfile={onNavigateToMyProfile}
+        onNavigateToMyProfileWithSubPage={(subPage) => {
+          try {
+            localStorage.setItem("myProfileSubPage", subPage)
+            window.dispatchEvent(new Event("myProfileSubPageChange"))
+          } catch {
+            // Ignore errors
+          }
+          onNavigateToMyProfile()
+        }}
         onNavigateToAdmin={onNavigateToAdmin}
         onNavigateToMessageCenter={onNavigateToMessageCenter}
         onLogout={onLogout}

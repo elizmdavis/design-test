@@ -175,6 +175,15 @@ export default function MessageCenter({
         currentPage={currentPage}
         onNavigate={onNavigate}
         onNavigateToMyProfile={onNavigateToMyProfile}
+        onNavigateToMyProfileWithSubPage={(subPage) => {
+          try {
+            localStorage.setItem("myProfileSubPage", subPage)
+            window.dispatchEvent(new Event("myProfileSubPageChange"))
+          } catch {
+            // Ignore errors
+          }
+          onNavigateToMyProfile()
+        }}
         onNavigateToAdmin={onNavigateToAdmin}
         onLogout={onLogout}
       />
