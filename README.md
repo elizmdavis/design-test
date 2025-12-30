@@ -208,3 +208,7 @@ This project is private and proprietary.
 - [shadcn/ui Documentation](https://ui.shadcn.com/)
 - [Tailwind CSS Documentation](https://tailwindcss.com/)
 - [TypeScript Documentation](https://www.typescriptlang.org/)
+
+## Testing Branch Protection Workflow
+
+This is a test change to verify the branch protection workflow is working correctly.
