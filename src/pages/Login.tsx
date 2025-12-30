@@ -59,13 +59,13 @@ export default function Login({ onLoginSuccess }: LoginProps) {
                         onChange={(e) => setUsername(e.target.value)}
                         onFocus={() => setIsFocused(true)}
                         onBlur={() => setIsFocused(false)}
-                        className="absolute inset-0 border-0 rounded-[4px] px-[14px] pt-4 pb-2 text-[16px] leading-6 tracking-[-0.176px] text-[#12181d] focus-visible:ring-0 focus-visible:ring-offset-0"
+                        className="absolute inset-0 h-full border-0 rounded-[4px] px-[14px] pt-5 pb-1 text-[16px] leading-6 tracking-[-0.176px] text-[#12181d] focus-visible:ring-0 focus-visible:ring-offset-0"
                         placeholder=""
                       />
                       <label
                         className={`absolute left-[14px] transition-all duration-200 pointer-events-none ${
                           isFocused || username
-                            ? "top-2 text-[12px] leading-4 text-[#0058a3] bg-white px-1 z-10"
+                            ? "top-1.5 text-[11px] leading-4 text-[#0058a3]"
                             : "top-1/2 -translate-y-1/2 text-[16px] leading-6 text-[#12181d]"
                         }`}
                       >
