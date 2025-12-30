@@ -5,7 +5,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Separator } from "@/components/ui/separator"
 import { Info, Upload, ExternalLink, X, FileText, Check } from "lucide-react"
-import { useMemo, useState } from "react"
+import { useState } from "react"
 
 interface ReimburseDocsProps {
   currentPage: string
@@ -37,13 +37,6 @@ export default function ReimburseDocs({
     // Mock upload - add a file when button is clicked
     setUploads([{ name: "Receipt.pdf", size: "184 KB", status: "uploaded" as const, date: "Jan 16" }])
   }
-
-  const uploadSummary = useMemo(() => {
-    const count = uploads.length
-    if (!count) return "Upload Valid Documentation"
-    if (count === 1) return uploads[0].name
-    return `${count} files uploaded`
-  }, [uploads])
 
   return (
     <div className="min-h-screen bg-[#F1FAFE]">

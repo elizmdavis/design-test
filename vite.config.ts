@@ -7,12 +7,14 @@ import { fileURLToPath } from 'url'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 // https://vite.dev/config/
-export default defineConfig({
+export default defineConfig(({ mode }) => ({
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
     },
   },
-  // base: '/design-test/', // Commented out for local development - uncomment for GitHub Pages deployment
-})
+  // Only set base path for production builds (GitHub Pages deployment)
+  // Local development will work at root path
+  base: mode === 'production' ? '/design-test/' : '/',
+}))
