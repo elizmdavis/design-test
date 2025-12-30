@@ -29,7 +29,7 @@ export default function ReimburseAnalyze({
   }, [onNavigate])
 
   return (
-    <div className="min-h-screen bg-[#F1FAFE]">
+    <div className="min-h-screen bg-[hsl(var(--wex-palette-blue-50))]">
       <Navigation
         currentPage={currentPage}
         onNavigate={onNavigate}
@@ -53,7 +53,7 @@ export default function ReimburseAnalyze({
           <Card className="border border-slate-200">
             <CardContent className="space-y-6 p-8">
               <div className="space-y-2 text-center">
-                <h1 className="text-2xl font-semibold text-[#1d2c38]">Analyzing your documentation</h1>
+                <h1 className="text-2xl font-semibold text-foreground">Analyzing your documentation</h1>
                 <p className="text-sm text-muted-foreground">
                   We&apos;re checking your upload for required details before the review step.
                 </p>
@@ -63,7 +63,7 @@ export default function ReimburseAnalyze({
                 <div className="flex h-16 w-16 items-center justify-center rounded-full bg-blue-50">
                   <Loader2 className="h-8 w-8 animate-spin text-blue-700" />
                 </div>
-                <p className="text-sm font-medium text-[#1d2c38]">This will take just a few seconds...</p>
+                <p className="text-sm font-medium text-foreground">This will take just a few seconds...</p>
               </div>
 
               <Separator />

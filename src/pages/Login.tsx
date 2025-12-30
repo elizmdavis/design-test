@@ -20,7 +20,7 @@ export default function Login({ onLoginSuccess }: LoginProps) {
   }
 
   return (
-    <div className="min-h-screen bg-[#F1FAFE] relative overflow-hidden">
+    <div className="min-h-screen bg-[hsl(var(--wex-palette-blue-50))] relative overflow-hidden">
       {/* Background decorative elements - simplified version */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Decorative circles/squares would go here - simplified for now */}
@@ -30,7 +30,7 @@ export default function Login({ onLoginSuccess }: LoginProps) {
       <div className="relative z-10 min-h-screen flex flex-col">
         {/* Login Card */}
         <div className="flex-1 flex items-center justify-center px-4 py-8">
-          <Card className="w-full max-w-[402px] bg-white rounded-lg shadow-[0px_8px_16px_0px_rgba(2,13,36,0.15),0px_0px_1px_0px_rgba(2,13,36,0.3)] border-0">
+          <Card className="w-full max-w-[402px] bg-card rounded-lg shadow-[0px_8px_16px_0px_rgba(2,13,36,0.15),0px_0px_1px_0px_rgba(2,13,36,0.3)] border-0">
             <CardContent className="p-8">
               <div className="flex flex-col gap-6">
                 {/* Logo + Title + Subtext */}
@@ -39,10 +39,10 @@ export default function Login({ onLoginSuccess }: LoginProps) {
                     <img src={WexLogo} alt="WEX" className="w-full h-full object-contain" />
                   </div>
                   <div className="flex flex-col gap-2 items-center text-center">
-                    <h1 className="text-[18px] font-semibold leading-6 tracking-[-0.252px] text-[#12181d]">
+                    <h1 className="text-[18px] font-semibold leading-6 tracking-[-0.252px] text-foreground">
                       Welcome
                     </h1>
-                    <p className="text-[16px] font-normal leading-6 tracking-[-0.176px] text-[#12181d] max-w-[328px]">
+                    <p className="text-[16px] font-normal leading-6 tracking-[-0.176px] text-foreground max-w-[328px]">
                       Please enter your username or email address to log into WEX Health & Benefits
                     </p>
                   </div>
@@ -52,21 +52,21 @@ export default function Login({ onLoginSuccess }: LoginProps) {
                 <form onSubmit={handleSubmit} className="flex flex-col gap-6">
                   {/* Input Field with Floating Label */}
                   <div className="relative">
-                    <div className="relative border-2 border-[#0058a3] rounded-[4px] h-14">
+                    <div className="relative border-2 border-primary rounded-[4px] h-14">
                       <Input
                         type="text"
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         onFocus={() => setIsFocused(true)}
                         onBlur={() => setIsFocused(false)}
-                        className="absolute inset-0 h-full border-0 rounded-[4px] px-[14px] pt-5 pb-1 text-[16px] leading-6 tracking-[-0.176px] text-[#12181d] focus-visible:ring-0 focus-visible:ring-offset-0"
+                        className="absolute inset-0 h-full border-0 rounded-[4px] px-[14px] pt-5 pb-1 text-[16px] leading-6 tracking-[-0.176px] text-foreground focus-visible:ring-0 focus-visible:ring-offset-0"
                         placeholder=""
                       />
                       <label
                         className={`absolute left-[14px] transition-all duration-200 pointer-events-none ${
                           isFocused || username
-                            ? "top-1.5 text-[11px] leading-4 text-[#0058a3]"
-                            : "top-1/2 -translate-y-1/2 text-[16px] leading-6 text-[#12181d]"
+                            ? "top-1.5 text-[11px] leading-4 text-primary"
+                            : "top-1/2 -translate-y-1/2 text-[16px] leading-6 text-foreground"
                         }`}
                       >
                         Username or Email address
@@ -77,7 +77,7 @@ export default function Login({ onLoginSuccess }: LoginProps) {
                   {/* Continue Button */}
                   <Button
                     type="submit"
-                    className="w-full h-10 bg-[#0058a3] text-white hover:bg-[#0058a3]/90 rounded-lg text-[14px] font-medium leading-6 tracking-[-0.084px]"
+                    className="w-full h-10 rounded-lg text-[14px] font-medium leading-6 tracking-[-0.084px]"
                   >
                     Continue
                   </Button>
@@ -85,10 +85,10 @@ export default function Login({ onLoginSuccess }: LoginProps) {
 
                 {/* Sign Up Link */}
                 <div className="flex gap-2 items-center justify-center text-[16px] leading-6 tracking-[-0.176px]">
-                  <p className="text-[#2d333a]">Don't have an account?</p>
+                  <p className="text-muted-foreground">Don't have an account?</p>
                   <button
                     type="button"
-                    className="text-[#0058a3] hover:underline cursor-pointer"
+                    className="text-primary hover:underline cursor-pointer"
                   >
                     Sign up
                   </button>
@@ -99,10 +99,10 @@ export default function Login({ onLoginSuccess }: LoginProps) {
         </div>
 
         {/* Footer */}
-        <footer className="bg-[#05619f] w-full py-[13px] px-[131px]">
+        <footer className="bg-[hsl(var(--wex-palette-blue-800))] w-full py-[13px] px-[131px]">
           <div className="flex flex-col gap-[14px] items-center">
             {/* Footer Links */}
-            <div className="flex gap-8 items-start text-[11px] font-semibold leading-4 tracking-[0.055px] text-white">
+            <div className="flex gap-8 items-start text-[11px] font-semibold leading-4 tracking-[0.055px] text-primary-foreground">
               <button className="underline decoration-solid underline-offset-2 hover:no-underline">
                 Browser Requirements
               </button>
@@ -118,7 +118,7 @@ export default function Login({ onLoginSuccess }: LoginProps) {
             </div>
             {/* Copyright */}
             <div className="flex gap-[42px] items-start">
-              <p className="text-[11px] font-normal leading-4 tracking-[0.055px] text-white text-center">
+              <p className="text-[11px] font-normal leading-4 tracking-[0.055px] text-primary-foreground text-center">
                 Copyright 2005-2024. Powered by [Company name], a WEX Inc. Proprietary Web Product. All Rights Reserved.
               </p>
             </div>
@@ -128,4 +128,3 @@ export default function Login({ onLoginSuccess }: LoginProps) {
     </div>
   )
 }
-

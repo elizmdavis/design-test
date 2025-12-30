@@ -77,7 +77,7 @@ export default function AdminCustomization({
   }
 
   return (
-    <div className="min-h-screen bg-[#F1FAFE]">
+    <div className="min-h-screen bg-[hsl(var(--wex-palette-blue-50))]">
       <Navigation
         currentPage={currentPage}
         onNavigate={onNavigate}
@@ -155,8 +155,8 @@ export default function AdminCustomization({
                     <CardContent className="p-4">
                       <div className="flex items-center gap-3">
                         <div
-                          className="w-10 h-10 rounded-md border"
-                          style={{ backgroundColor: color.hex }}
+                          className="color-swatch-lg"
+                          style={{ '--swatch-color': color.hex } as React.CSSProperties}
                         />
                         <div className="flex-1">
                           <div className="flex items-center justify-between">
@@ -231,10 +231,8 @@ export default function AdminCustomization({
                               <SelectValue>
                                 <div className="flex items-center gap-2">
                                   <div
-                                    className="w-5 h-5 rounded border"
-                                    style={{
-                                      backgroundColor: colorMappings[key],
-                                    }}
+                                    className="color-swatch"
+                                    style={{ '--swatch-color': colorMappings[key] } as React.CSSProperties}
                                   />
                                   <span>{colorMappings[key]}</span>
                                 </div>
@@ -245,10 +243,8 @@ export default function AdminCustomization({
                                 <SelectItem key={color.id} value={color.hex}>
                                   <div className="flex items-center gap-2">
                                     <div
-                                      className="w-5 h-5 rounded border"
-                                      style={{
-                                        backgroundColor: color.hex,
-                                      }}
+                                      className="color-swatch"
+                                      style={{ '--swatch-color': color.hex } as React.CSSProperties}
                                     />
                                     <span>
                                       {color.name} ({color.hex})
@@ -294,10 +290,8 @@ export default function AdminCustomization({
                               <SelectValue>
                                 <div className="flex items-center gap-2">
                                   <div
-                                    className="w-5 h-5 rounded border"
-                                    style={{
-                                      backgroundColor: colorMappings[key],
-                                    }}
+                                    className="color-swatch"
+                                    style={{ '--swatch-color': colorMappings[key] } as React.CSSProperties}
                                   />
                                   <span>{colorMappings[key]}</span>
                                 </div>
@@ -308,10 +302,8 @@ export default function AdminCustomization({
                                 <SelectItem key={color.id} value={color.hex}>
                                   <div className="flex items-center gap-2">
                                     <div
-                                      className="w-5 h-5 rounded border"
-                                      style={{
-                                        backgroundColor: color.hex,
-                                      }}
+                                      className="color-swatch"
+                                      style={{ '--swatch-color': color.hex } as React.CSSProperties}
                                     />
                                     <span>
                                       {color.name} ({color.hex})
@@ -357,10 +349,8 @@ export default function AdminCustomization({
                               <SelectValue>
                                 <div className="flex items-center gap-2">
                                   <div
-                                    className="w-5 h-5 rounded border"
-                                    style={{
-                                      backgroundColor: colorMappings[key],
-                                    }}
+                                    className="color-swatch"
+                                    style={{ '--swatch-color': colorMappings[key] } as React.CSSProperties}
                                   />
                                   <span>{colorMappings[key]}</span>
                                 </div>
@@ -371,10 +361,8 @@ export default function AdminCustomization({
                                 <SelectItem key={color.id} value={color.hex}>
                                   <div className="flex items-center gap-2">
                                     <div
-                                      className="w-5 h-5 rounded border"
-                                      style={{
-                                        backgroundColor: color.hex,
-                                      }}
+                                      className="color-swatch"
+                                      style={{ '--swatch-color': color.hex } as React.CSSProperties}
                                     />
                                     <span>
                                       {color.name} ({color.hex})
@@ -427,7 +415,16 @@ export default function AdminCustomization({
                   </TabsList>
 
                   <TabsContent value="homepage" className="mt-4">
-                    <div className="bg-muted rounded-lg p-2 overflow-auto max-h-[600px]">
+                    <div 
+                      className="bg-muted rounded-lg p-2 overflow-auto max-h-[600px]"
+                      style={{
+                        '--preview-portal-bg': colorMappings.portalBackground || '#f1fafe',
+                        '--preview-primary-btn': colorMappings.primaryButton || '#0073cf',
+                        '--preview-secondary-btn': colorMappings.secondaryButton || '#E4F5FD',
+                        '--preview-link-color': colorMappings.links || '#0073cf',
+                        '--preview-accent': colorMappings.assistIQ || '#00c7b1',
+                      } as React.CSSProperties}
+                    >
                       {/* Detailed Preview matching Figma design */}
                       <div className="bg-background rounded shadow-sm overflow-hidden text-[6px] leading-tight">
                         {/* Navigation */}
@@ -447,24 +444,14 @@ export default function AdminCustomization({
                         </div>
 
                         {/* Hero */}
-                        <div
-                          className="px-2 py-1.5"
-                          style={{
-                            backgroundColor: colorMappings.portalBackground || "#A0DCF8",
-                          }}
-                        >
+                        <div className="px-2 py-1.5 preview-portal-bg">
                           <p className="font-semibold text-[7px]">
                             Welcome back, Crystal
                           </p>
                         </div>
 
                         {/* Content */}
-                        <div
-                          className="p-2 space-y-1.5"
-                          style={{
-                            backgroundColor: colorMappings.portalBackground || "#f1fafe",
-                          }}
-                        >
+                        <div className="p-2 space-y-1.5 preview-portal-bg">
                           {/* Next Action */}
                           <Card className="p-1.5">
                             <div className="flex items-center justify-between gap-1.5">
@@ -481,10 +468,7 @@ export default function AdminCustomization({
                               </div>
                               <Button
                                 size="sm"
-                                className="h-3 px-1.5 text-[5px]"
-                                style={{
-                                  backgroundColor: colorMappings.secondaryButton,
-                                }}
+                                className="h-3 px-1.5 text-[5px] preview-secondary-btn"
                               >
                                 Upload →
                               </Button>
@@ -494,10 +478,7 @@ export default function AdminCustomization({
                               <Button
                                 variant="link"
                                 size="sm"
-                                className="h-3 text-[5px]"
-                                style={{
-                                  color: colorMappings.links,
-                                }}
+                                className="h-3 text-[5px] preview-link"
                               >
                                 View All Notifications →
                               </Button>
@@ -518,12 +499,7 @@ export default function AdminCustomization({
                                 </p>
                                 <div className="space-y-0.5">
                                   <div className="flex h-0.5 rounded-full overflow-hidden">
-                                    <div
-                                      className="w-1/2"
-                                      style={{
-                                        backgroundColor: colorMappings.assistIQ || "#00c7b1",
-                                      }}
-                                    />
+                                    <div className="w-1/2 preview-accent" />
                                     <div className="w-1/2 bg-gray-200" />
                                   </div>
                                   <div className="flex justify-between text-[4px] text-muted-foreground">
@@ -531,12 +507,7 @@ export default function AdminCustomization({
                                     <span>$4,150 Max</span>
                                   </div>
                                 </div>
-                                <div
-                                  className="p-1 rounded space-y-0.5"
-                                  style={{
-                                    backgroundColor: colorMappings.portalBackground || "#e4f5fd",
-                                  }}
-                                >
+                                <div className="p-1 rounded space-y-0.5 preview-portal-bg">
                                   <div className="flex items-start gap-1">
                                     <div className="w-2 h-2 rounded-full bg-blue-300" />
                                     <p className="text-[4px] flex-1">
@@ -546,10 +517,7 @@ export default function AdminCustomization({
                                   <Button
                                     size="sm"
                                     variant="link"
-                                    className="h-2 px-0 text-[4px]"
-                                    style={{
-                                      color: colorMappings.links,
-                                    }}
+                                    className="h-2 px-0 text-[4px] preview-link"
                                   >
                                     See Options →
                                   </Button>
@@ -575,10 +543,7 @@ export default function AdminCustomization({
                               <Separator />
                               <Button
                                 size="sm"
-                                className="w-full h-3 text-[5px]"
-                                style={{
-                                  backgroundColor: colorMappings.primaryButton,
-                                }}
+                                className="w-full h-3 text-[5px] preview-primary-btn"
                               >
                                 Reimburse Myself
                               </Button>
@@ -608,14 +573,9 @@ export default function AdminCustomization({
                                   (period, i) => (
                                     <button
                                       key={period}
-                                      className="flex-1 py-0.5 text-[4px] border-r last:border-r-0"
-                                      style={{
-                                        backgroundColor:
-                                          i === 0
-                                            ? colorMappings.primaryButton
-                                            : "white",
-                                        color: i === 0 ? "white" : "black",
-                                      }}
+                                      className={`flex-1 py-0.5 text-[4px] border-r last:border-r-0 ${
+                                        i === 0 ? "preview-primary-btn text-white" : "bg-white text-black"
+                                      }`}
                                     >
                                       {period}
                                     </button>
@@ -672,10 +632,7 @@ export default function AdminCustomization({
                               <Button
                                 variant="link"
                                 size="sm"
-                                className="h-2 text-[5px] w-full"
-                                style={{
-                                  color: colorMappings.links,
-                                }}
+                                className="h-2 text-[5px] w-full preview-link"
                               >
                                 View All Investments →
                               </Button>
@@ -743,10 +700,7 @@ export default function AdminCustomization({
                                 <Button
                                   variant="link"
                                   size="sm"
-                                  className="h-2 text-[5px] w-full"
-                                  style={{
-                                    color: colorMappings.links,
-                                  }}
+                                  className="h-2 text-[5px] w-full preview-link"
                                 >
                                   View All Transactions →
                                 </Button>

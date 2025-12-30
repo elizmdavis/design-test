@@ -135,30 +135,30 @@ export default function ReimburseMyself({
   const renderMvp = () => (
     <div className="space-y-6">
       <div>
-        <h1 className="text-2xl font-semibold text-[#1d2c38]">Reimburse Myself</h1>
+        <h1 className="text-2xl font-semibold text-foreground">Reimburse Myself</h1>
       </div>
 
       <Card className="border border-slate-200">
         <CardContent className="space-y-8 p-6 md:p-8">
           <div>
-            <p className="text-sm font-semibold text-[#1d2c38]">Available Balance</p>
+            <p className="text-sm font-semibold text-foreground">Available Balance</p>
             <div className="mt-3 space-y-1">
-              <div className="flex items-center gap-2 text-sm text-[#1d2c38]">
+              <div className="flex items-center gap-2 text-sm text-foreground">
                 Medical FSA
                 <Info className="h-4 w-4 text-slate-500" />
               </div>
-              <p className="text-xl font-semibold text-[#1d2c38]">$2,734.76</p>
+              <p className="text-xl font-semibold text-foreground">$2,734.76</p>
             </div>
           </div>
 
           <Separator />
 
           <div className="space-y-4">
-            <h2 className="text-base font-semibold text-[#1d2c38]">Select Accounts</h2>
+            <h2 className="text-base font-semibold text-foreground">Select Accounts</h2>
 
             <div className="space-y-4">
               <div className="space-y-2">
-                <Label className="text-sm text-[#1d2c38]">Pay from</Label>
+                <Label className="text-sm text-foreground">Pay from</Label>
                 <Select
                   value={formData.account || undefined}
                   onValueChange={(value) => handleChange("account", value)}
@@ -175,7 +175,7 @@ export default function ReimburseMyself({
               </div>
 
               <div className="space-y-2">
-                <Label className="text-sm text-[#1d2c38]">Pay to</Label>
+                <Label className="text-sm text-foreground">Pay to</Label>
                 <Select
                   value={formData.category || undefined}
                   onValueChange={(value) => handleChange("category", value)}
@@ -218,7 +218,7 @@ export default function ReimburseMyself({
     return (
       <>
         <div className="space-y-2">
-          <h1 className="text-3xl font-bold text-[#1d2c38]">Reimburse Myself</h1>
+          <h1 className="text-3xl font-bold text-foreground">Reimburse Myself</h1>
         </div>
 
         {submitted && (
@@ -249,7 +249,7 @@ export default function ReimburseMyself({
                 {!showFormFields && (
                   <div className="space-y-4">
                     <div className="flex items-center gap-2">
-                      <Label className="text-lg font-semibold text-[#1d2c38]">Upload receipt</Label>
+                      <Label className="text-lg font-semibold text-foreground">Upload receipt</Label>
                       <TooltipProvider>
                         <Tooltip>
                           <TooltipTrigger asChild>
@@ -290,7 +290,7 @@ export default function ReimburseMyself({
                           <Upload className="h-10 w-10 text-blue-600" />
                         </div>
                         <div>
-                          <p className="text-base font-semibold text-[#1d2c38]">Click or drag to upload</p>
+                          <p className="text-base font-semibold text-foreground">Click or drag to upload</p>
                           <p className="text-sm text-muted-foreground mt-2">PDF, JPG, or PNG up to 10MB</p>
                         </div>
                       </div>
@@ -330,7 +330,7 @@ export default function ReimburseMyself({
                       <div className="flex items-center gap-3 rounded-lg border-2 border-blue-200 bg-blue-50 p-4">
                         <Loader2 className="h-5 w-5 animate-spin text-blue-600" />
                         <div>
-                          <p className="text-sm font-medium text-[#1d2c38]">Analyzing receipt...</p>
+                          <p className="text-sm font-medium text-foreground">Analyzing receipt...</p>
                           <p className="text-xs text-muted-foreground">Extracting details from your document</p>
                         </div>
                       </div>
@@ -341,7 +341,7 @@ export default function ReimburseMyself({
                             <CheckCircle2 className="h-5 w-5 text-green-600" />
                           </div>
                           <div>
-                            <p className="text-sm font-medium text-[#1d2c38]">{uploadedFile.name}</p>
+                            <p className="text-sm font-medium text-foreground">{uploadedFile.name}</p>
                             <p className="text-xs text-muted-foreground">{uploadedFile.size}</p>
                           </div>
                         </div>
@@ -368,14 +368,14 @@ export default function ReimburseMyself({
                       {manualEntryMode && (
                         <div className="flex items-center gap-2 pb-2 border-b">
                           <FileText className="h-4 w-4 text-muted-foreground" />
-                          <Label className="text-sm font-medium text-[#1d2c38]">Manual entry</Label>
+                          <Label className="text-sm font-medium text-foreground">Manual entry</Label>
                         </div>
                       )}
 
                       {uploadedFile && !isAnalyzing && (
                         <div className="flex items-center gap-2 pb-2 border-b">
                           <CheckCircle2 className="h-4 w-4 text-blue-600" />
-                          <Label className="text-sm font-medium text-[#1d2c38]">Review and adjust</Label>
+                          <Label className="text-sm font-medium text-foreground">Review and adjust</Label>
                         </div>
                       )}
 
@@ -588,7 +588,7 @@ export default function ReimburseMyself({
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-sm text-muted-foreground">Amount</span>
-                <span className="text-base font-semibold text-[#1d2c38]">
+                <span className="text-base font-semibold text-foreground">
                   {showFormFields && formData.amount ? formattedAmount : "$0.00"}
                 </span>
               </div>
@@ -620,7 +620,7 @@ export default function ReimburseMyself({
 
   return (
     <>
-      <div className="min-h-screen bg-[#F1FAFE]">
+      <div className="min-h-screen bg-[hsl(var(--wex-palette-blue-50))]">
         <Navigation
           currentPage={currentPage}
           onNavigate={onNavigate}

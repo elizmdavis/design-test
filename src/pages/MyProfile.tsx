@@ -117,9 +117,9 @@ export default function MyProfile({
 
             {/* Info Banner */}
             <div className="border-b border-gray-200 px-6 py-6">
-              <Alert className="border border-[#bfdbfe] bg-[rgba(239,246,255,0.95)] shadow-[0px_4px_8px_0px_rgba(2,5,10,0.04)] rounded-md px-[10.5px] py-[7px] [&>svg]:h-4 [&>svg]:w-4 gap-[7px]">
-                <Info className="h-4 w-4 text-[#0058a3]" />
-                <AlertDescription className="text-[#0058a3] text-base leading-6 tracking-[-0.176px] m-0 whitespace-normal inline">
+              <Alert className="border border-[hsl(var(--wex-palette-blue-200))] bg-[hsl(var(--wex-palette-blue-50)/0.95)] shadow-[0px_4px_8px_0px_rgba(2,5,10,0.04)] rounded-md px-[10.5px] py-[7px] [&>svg]:h-4 [&>svg]:w-4 gap-[7px]">
+                <Info className="h-4 w-4 text-primary" />
+                <AlertDescription className="text-primary text-base leading-6 tracking-[-0.176px] m-0 whitespace-normal inline">
                   Certain profile information is managed by your organization to keep records consistent and secure. If you notice something incorrect or need an update, please contact your administrator.
                 </AlertDescription>
               </Alert>
@@ -231,7 +231,7 @@ export default function MyProfile({
                 <h2 className="text-2xl font-semibold text-gray-800">Dependents</h2>
                 <Button
                   variant="outline"
-                  className="border-[#0058a3] text-[#0058a3] hover:bg-blue-50"
+                  className="border-primary text-primary hover:bg-blue-50"
                 >
                   <Plus className="mr-2 h-4 w-4" />
                   Add New Dependent
@@ -259,7 +259,7 @@ export default function MyProfile({
                 <h2 className="text-2xl font-semibold text-gray-800">Beneficiaries</h2>
                 <Button
                   variant="outline"
-                  className="border-[#0058a3] text-[#0058a3] hover:bg-blue-50"
+                  className="border-primary text-primary hover:bg-blue-50"
                 >
                   <Plus className="mr-2 h-4 w-4" />
                   Add Beneficiary
@@ -289,7 +289,7 @@ export default function MyProfile({
                 <h2 className="text-2xl font-semibold text-gray-800">Banking</h2>
                 <Button
                   variant="outline"
-                  className="border-[#0058a3] text-[#0058a3] hover:bg-blue-50"
+                  className="border-primary text-primary hover:bg-blue-50"
                 >
                   <Plus className="mr-2 h-4 w-4" />
                   Add Bank Account
@@ -449,7 +449,7 @@ export default function MyProfile({
   }
 
   return (
-    <div className="min-h-screen bg-[#F1FAFE]">
+    <div className="min-h-screen bg-[hsl(var(--wex-palette-blue-50))]">
       <Navigation
         currentPage={currentPage}
         onNavigate={onNavigate}

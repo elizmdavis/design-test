@@ -1,63 +1,84 @@
-"use client"
-
 import * as React from "react"
 import * as SliderPrimitive from "@radix-ui/react-slider"
-
 import { cn } from "@/lib/utils"
 
-function Slider({
-  className,
-  defaultValue,
-  value,
-  min = 0,
-  max = 100,
-  ...props
-}: React.ComponentProps<typeof SliderPrimitive.Root>) {
-  const _values = React.useMemo(
-    () =>
-      Array.isArray(value)
-        ? value
-        : Array.isArray(defaultValue)
-          ? defaultValue
-          : [min, max],
-    [value, defaultValue, min, max]
-  )
+export interface SliderProps
+  extends React.ComponentPropsWithoutRef<typeof SliderPrimitive.Root> {
+  /** Shows current value(s) as labels */
+  showValue?: boolean
+}
+
+const Slider = React.forwardRef<
+  React.ElementRef<typeof SliderPrimitive.Root>,
+  SliderProps
+>(({ className, orientation = "horizontal", showValue, value, defaultValue, "aria-label": ariaLabel = "Slider", ...props }, ref) => {
+  const isVertical = orientation === "vertical"
+  const currentValue = value ?? defaultValue ?? [0]
+  const thumbCount = Array.isArray(currentValue) ? currentValue.length : 1
+
+  // Generate aria-labels for thumbs (range sliders get "min" and "max" labels)
+  const getThumbLabel = (index: number): string => {
+    if (thumbCount === 1) return ariaLabel
+    if (thumbCount === 2) return index === 0 ? `${ariaLabel} minimum` : `${ariaLabel} maximum`
+    return `${ariaLabel} value ${index + 1}`
+  }
 
   return (
-    <SliderPrimitive.Root
-      data-slot="slider"
-      defaultValue={defaultValue}
-      value={value}
-      min={min}
-      max={max}
-      className={cn(
-        "relative flex w-full touch-none items-center select-none data-[disabled]:opacity-50 data-[orientation=vertical]:h-full data-[orientation=vertical]:min-h-44 data-[orientation=vertical]:w-auto data-[orientation=vertical]:flex-col",
-        className
-      )}
-      {...props}
-    >
-      <SliderPrimitive.Track
-        data-slot="slider-track"
+    <div className={cn("relative", isVertical && "h-full")}>
+      <SliderPrimitive.Root
+        ref={ref}
+        orientation={orientation}
+        value={value}
+        defaultValue={defaultValue}
         className={cn(
-          "bg-muted relative grow overflow-hidden rounded-full data-[orientation=horizontal]:h-1.5 data-[orientation=horizontal]:w-full data-[orientation=vertical]:h-full data-[orientation=vertical]:w-1.5"
+          "relative flex touch-none select-none",
+          isVertical
+            ? "h-full w-5 flex-col items-center"
+            : "w-full items-center",
+          className
         )}
+        {...props}
       >
-        <SliderPrimitive.Range
-          data-slot="slider-range"
+        <SliderPrimitive.Track
           className={cn(
-            "bg-primary absolute data-[orientation=horizontal]:h-full data-[orientation=vertical]:w-full"
+            "relative grow overflow-hidden rounded-full bg-wex-slider-track-bg",
+            isVertical ? "w-2 h-full" : "h-2 w-full"
           )}
-        />
-      </SliderPrimitive.Track>
-      {Array.from({ length: _values.length }, (_, index) => (
-        <SliderPrimitive.Thumb
-          data-slot="slider-thumb"
-          key={index}
-          className="border-primary ring-ring/50 block size-4 shrink-0 rounded-full border bg-white shadow-sm transition-[color,box-shadow] hover:ring-4 focus-visible:ring-4 focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50"
-        />
-      ))}
-    </SliderPrimitive.Root>
+        >
+          <SliderPrimitive.Range
+            className={cn(
+              "absolute bg-wex-slider-range-bg",
+              isVertical ? "w-full" : "h-full"
+            )}
+          />
+        </SliderPrimitive.Track>
+        {Array.from({ length: thumbCount }).map((_, i) => (
+          <SliderPrimitive.Thumb
+            key={i}
+            aria-label={getThumbLabel(i)}
+            className="block h-5 w-5 rounded-full border-2 border-wex-slider-thumb-border bg-wex-slider-thumb-bg shadow transition-colors cursor-grab active:cursor-grabbing focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-wex-slider-focus-ring disabled:pointer-events-none disabled:opacity-[var(--wex-component-slider-disabled-opacity)]"
+          />
+        ))}
+      </SliderPrimitive.Root>
+      {showValue && (
+        <div
+          className={cn(
+            "text-sm text-muted-foreground",
+            isVertical ? "mt-2 text-center" : "mt-1 flex justify-between"
+          )}
+        >
+          {Array.isArray(currentValue) ? (
+            currentValue.map((v, i) => (
+              <span key={i}>{v}</span>
+            ))
+          ) : (
+            <span>{currentValue}</span>
+          )}
+        </div>
+      )}
+    </div>
   )
-}
+})
+Slider.displayName = SliderPrimitive.Root.displayName
 
 export { Slider }

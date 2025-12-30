@@ -36,7 +36,7 @@ const SelectCard = React.forwardRef<HTMLDivElement, SelectCardProps>(
       onSelectedChange,
       selectionType = "radio",
       disabled = false,
-      value,
+      // value is available for form integration
       viewLabel,
       onViewClick,
       viewHref,

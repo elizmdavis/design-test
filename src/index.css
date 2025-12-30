@@ -1,3 +1,8 @@
+@import "./styles/wex.tokens.css";
+@import "./styles/wex.shadcn-bridge.css";
+@import "./styles/wex.components-bridge.css";
+@import "./styles/wex-variants.css";
+
 @import "tailwindcss";
 @import "tw-animate-css";
 
@@ -26,6 +31,13 @@
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
@@ -34,7 +46,7 @@
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);
-  --color-sidebar: var(--sidebar);
+  --color-sidebar: var(--sidebar-background);
   --color-sidebar-foreground: var(--sidebar-foreground);
   --color-sidebar-primary: var(--sidebar-primary);
   --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
@@ -42,75 +54,53 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
-}
 
-:root {
-  --radius: 0.625rem;
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.646 0.222 41.116);
-  --chart-2: oklch(0.6 0.118 184.704);
-  --chart-3: oklch(0.398 0.07 227.392);
-  --chart-4: oklch(0.828 0.189 84.429);
-  --chart-5: oklch(0.769 0.188 70.08);
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-}
+  /* WEX Component Tokens for Tailwind */
+  --color-wex-input-bg: var(--wex-component-input-bg);
+  --color-wex-input-fg: var(--wex-component-input-fg);
+  --color-wex-input-border: var(--wex-component-input-border);
+  --color-wex-input-border-hover: var(--wex-component-input-border-hover);
+  --color-wex-input-border-focus: var(--wex-component-input-border-focus);
+  --color-wex-input-focus-ring: var(--wex-component-input-focus-ring);
+  --color-wex-input-placeholder: var(--wex-component-input-placeholder);
+  --color-wex-input-disabled-bg: var(--wex-component-input-disabled-bg);
+  --color-wex-input-disabled-fg: var(--wex-component-input-disabled-fg);
+  --color-wex-floatlabel-label-fg: var(--wex-component-floatlabel-label-fg);
+  --color-wex-floatlabel-label-focus-fg: var(--wex-component-floatlabel-label-focus-fg);
 
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.488 0.243 264.376);
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  /* Card */
+  --color-wex-card-bg: var(--wex-component-card-bg);
+  --color-wex-card-fg: var(--wex-component-card-fg);
+  --color-wex-card-border: var(--wex-component-card-border);
+  --color-wex-card-header-fg: var(--wex-component-card-header-fg);
+  --color-wex-card-footer-fg: var(--wex-component-card-footer-fg);
+
+  /* Badge */
+  --color-wex-badge-neutral-bg: var(--wex-component-badge-neutral-bg);
+  --color-wex-badge-neutral-fg: var(--wex-component-badge-neutral-fg);
+  --color-wex-badge-neutral-border: var(--wex-component-badge-neutral-border);
+  --color-wex-badge-info-bg: var(--wex-component-badge-info-bg);
+  --color-wex-badge-info-fg: var(--wex-component-badge-info-fg);
+  --color-wex-badge-info-border: var(--wex-component-badge-info-border);
+  --color-wex-badge-success-bg: var(--wex-component-badge-success-bg);
+  --color-wex-badge-success-fg: var(--wex-component-badge-success-fg);
+  --color-wex-badge-success-border: var(--wex-component-badge-success-border);
+  --color-wex-badge-warning-bg: var(--wex-component-badge-warning-bg);
+  --color-wex-badge-warning-fg: var(--wex-component-badge-warning-fg);
+  --color-wex-badge-warning-border: var(--wex-component-badge-warning-border);
+  --color-wex-badge-destructive-bg: var(--wex-component-badge-destructive-bg);
+  --color-wex-badge-destructive-fg: var(--wex-component-badge-destructive-fg);
+  --color-wex-badge-destructive-border: var(--wex-component-badge-destructive-border);
+
+  /* Dropdown / Menu */
+  --color-wex-menu-content-bg: var(--wex-component-menu-content-bg);
+  --color-wex-menu-content-border: var(--wex-component-menu-content-border);
+  --color-wex-menu-item-fg: var(--wex-component-menu-item-fg);
+  --color-wex-menu-item-hover-bg: var(--wex-component-menu-item-hover-bg);
+  --color-wex-menu-item-focus-bg: var(--wex-component-menu-item-focus-bg);
+  --color-wex-menu-separator: var(--wex-component-menu-separator);
+  --color-wex-menu-shortcut-fg: var(--wex-component-menu-shortcut-fg);
+  --color-wex-menu-disabled-opacity: var(--wex-component-menu-disabled-opacity);
 }
 
 @layer base {
@@ -120,4 +110,55 @@
   body {
     @apply bg-background text-foreground;
   }
+}
+
+@layer utilities {
+  /* Explicit utilities to map WEX component tokens
+     IMPORTANT: Must wrap in hsl() because WEX tokens store raw HSL triplets */
+  
+  /* Card */
+  .bg-wex-card-bg { background-color: hsl(var(--wex-component-card-bg)); }
+  .text-wex-card-fg { color: hsl(var(--wex-component-card-fg)); }
+  .border-wex-card-border { border-color: hsl(var(--wex-component-card-border)); }
+  .text-wex-card-header-fg { color: hsl(var(--wex-component-card-header-fg)); }
+  .text-wex-card-footer-fg { color: hsl(var(--wex-component-card-footer-fg)); }
+
+  /* Popover */
+  .bg-wex-popover-bg { background-color: hsl(var(--wex-component-popover-bg)); }
+  .text-wex-popover-fg { color: hsl(var(--wex-component-popover-fg)); }
+  .border-wex-popover-border { border-color: hsl(var(--wex-component-popover-border)); }
+
+  /* Badge - Neutral */
+  .bg-wex-badge-neutral-bg { background-color: hsl(var(--wex-component-badge-neutral-bg)); }
+  .text-wex-badge-neutral-fg { color: hsl(var(--wex-component-badge-neutral-fg)); }
+  .border-wex-badge-neutral-border { border-color: hsl(var(--wex-component-badge-neutral-border)); }
+
+  /* Badge - Destructive */
+  .bg-wex-badge-destructive-bg { background-color: hsl(var(--wex-component-badge-destructive-bg)); }
+  .text-wex-badge-destructive-fg { color: hsl(var(--wex-component-badge-destructive-fg)); }
+  .border-wex-badge-destructive-border { border-color: hsl(var(--wex-component-badge-destructive-border)); }
+
+  /* Badge - Info */
+  .bg-wex-badge-info-bg { background-color: hsl(var(--wex-component-badge-info-bg)); }
+  .text-wex-badge-info-fg { color: hsl(var(--wex-component-badge-info-fg)); }
+  .border-wex-badge-info-border { border-color: hsl(var(--wex-component-badge-info-border)); }
+
+  /* Badge - Success */
+  .bg-wex-badge-success-bg { background-color: hsl(var(--wex-component-badge-success-bg)); }
+  .text-wex-badge-success-fg { color: hsl(var(--wex-component-badge-success-fg)); }
+  .border-wex-badge-success-border { border-color: hsl(var(--wex-component-badge-success-border)); }
+
+  /* Badge - Warning */
+  .bg-wex-badge-warning-bg { background-color: hsl(var(--wex-component-badge-warning-bg)); }
+  .text-wex-badge-warning-fg { color: hsl(var(--wex-component-badge-warning-fg)); }
+  .border-wex-badge-warning-border { border-color: hsl(var(--wex-component-badge-warning-border)); }
+
+  /* Dropdown / Menu */
+  .bg-wex-menu-content-bg { background-color: hsl(var(--wex-component-menu-content-bg)); }
+  .border-wex-menu-content-border { border-color: hsl(var(--wex-component-menu-content-border)); }
+  .text-wex-menu-item-fg { color: hsl(var(--wex-component-menu-item-fg)); }
+  .bg-wex-menu-item-hover-bg { background-color: hsl(var(--wex-component-menu-item-hover-bg)); }
+  .bg-wex-menu-item-focus-bg { background-color: hsl(var(--wex-component-menu-item-focus-bg)); }
+  .bg-wex-menu-separator { background-color: hsl(var(--wex-component-menu-separator)); }
+  .text-wex-menu-shortcut-fg { color: hsl(var(--wex-component-menu-shortcut-fg)); }
 }

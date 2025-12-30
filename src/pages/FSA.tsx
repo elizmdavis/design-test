@@ -18,7 +18,7 @@ export default function FSA({
   onLogout,
 }: FSAProps) {
   return (
-    <div className="min-h-screen bg-[#F1FAFE]">
+    <div className="min-h-screen bg-[hsl(var(--wex-palette-blue-50))]">
       <Navigation
         currentPage={currentPage}
         onNavigate={onNavigate}

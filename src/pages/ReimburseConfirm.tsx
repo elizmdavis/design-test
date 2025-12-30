@@ -46,7 +46,7 @@ export default function ReimburseConfirm({
   }
 
   return (
-    <div className="min-h-screen bg-[#F1FAFE]">
+    <div className="min-h-screen bg-[hsl(var(--wex-palette-blue-50))]">
       <Navigation
         currentPage={currentPage}
         onNavigate={onNavigate}
@@ -68,7 +68,7 @@ export default function ReimburseConfirm({
       <div className="mx-auto max-w-[1440px] px-8 py-8">
         <div className="mx-auto max-w-[1376px] space-y-8">
           <div className="flex items-center justify-between">
-            <h1 className="text-2xl font-semibold text-[#1d2c38]">Reimburse Myself</h1>
+            <h1 className="text-2xl font-semibold text-foreground">Reimburse Myself</h1>
           </div>
 
           {showSuccessBanner && (
@@ -98,23 +98,23 @@ export default function ReimburseConfirm({
           <Card className="border border-slate-200">
             <CardContent className="space-y-8 p-6 md:p-8">
               <div>
-                <p className="text-sm font-semibold text-[#1d2c38]">Available Balance</p>
+                <p className="text-sm font-semibold text-foreground">Available Balance</p>
                 <div className="mt-3 space-y-1">
-                  <div className="flex items-center gap-2 text-sm text-[#1d2c38]">
+                  <div className="flex items-center gap-2 text-sm text-foreground">
                     Medical FSA <Info className="h-4 w-4 text-slate-500" />
                   </div>
-                  <p className="text-xl font-semibold text-[#1d2c38]">$2,734.76</p>
+                  <p className="text-xl font-semibold text-foreground">$2,734.76</p>
                 </div>
               </div>
 
               <Separator />
 
               <div className="space-y-4">
-                <h2 className="text-base font-semibold text-[#1d2c38]">Transaction Summary</h2>
+                <h2 className="text-base font-semibold text-foreground">Transaction Summary</h2>
                 <div className="overflow-hidden rounded-md border">
                   <Table>
                     <TableHeader>
-                      <TableRow className="bg-[#0058a3] hover:bg-[#0058a3]">
+                      <TableRow className="bg-primary hover:bg-primary">
                         <TableHead className="text-xs font-medium text-white">From</TableHead>
                         <TableHead className="text-xs font-medium text-white">To</TableHead>
                         <TableHead className="text-xs font-medium text-white">Expense</TableHead>
@@ -164,23 +164,23 @@ export default function ReimburseConfirm({
                                 <div className="grid grid-cols-2 gap-4 text-sm">
                                   <div>
                                     <p className="text-muted-foreground mb-1">Provider</p>
-                                    <p className="font-medium text-[#1d2c38]">Dr. Jorge Doe</p>
+                                    <p className="font-medium text-foreground">Dr. Jorge Doe</p>
                                   </div>
                                   <div>
                                     <p className="text-muted-foreground mb-1">Date of Service</p>
-                                    <p className="font-medium text-[#1d2c38]">06/20/2026</p>
+                                    <p className="font-medium text-foreground">06/20/2026</p>
                                   </div>
                                   <div>
                                     <p className="text-muted-foreground mb-1">Category</p>
-                                    <p className="font-medium text-[#1d2c38]">Medical</p>
+                                    <p className="font-medium text-foreground">Medical</p>
                                   </div>
                                   <div>
                                     <p className="text-muted-foreground mb-1">Type</p>
-                                    <p className="font-medium text-[#1d2c38]">Office Visit</p>
+                                    <p className="font-medium text-foreground">Office Visit</p>
                                   </div>
                                   <div className="col-span-2">
                                     <p className="text-muted-foreground mb-1">Description</p>
-                                    <p className="font-medium text-[#1d2c38]">Office visit for routine checkup</p>
+                                    <p className="font-medium text-foreground">Office visit for routine checkup</p>
                                   </div>
                                 </div>
                               </div>
@@ -203,7 +203,7 @@ export default function ReimburseConfirm({
                   <Separator />
 
                   <div className="space-y-3">
-                    <h3 className="text-base font-semibold text-[#1d2c38]">Claims Terms and Conditions</h3>
+                    <h3 className="text-base font-semibold text-foreground">Claims Terms and Conditions</h3>
                     <div className="rounded-md border bg-white px-4 py-3">
                       <div className="flex items-start gap-3">
                         <Checkbox
@@ -211,7 +211,7 @@ export default function ReimburseConfirm({
                           checked={acceptedTerms}
                           onCheckedChange={(checked) => setAcceptedTerms(Boolean(checked))}
                         />
-                        <label htmlFor="terms" className="text-sm text-[#1d2c38] leading-relaxed">
+                        <label htmlFor="terms" className="text-sm text-foreground leading-relaxed">
                           I have read, understand, and agree to the{" "}
                           <button className="text-blue-700 underline underline-offset-2">Terms and Conditions</button>.
                         </label>

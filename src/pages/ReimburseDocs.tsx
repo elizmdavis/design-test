@@ -39,7 +39,7 @@ export default function ReimburseDocs({
   }
 
   return (
-    <div className="min-h-screen bg-[#F1FAFE]">
+    <div className="min-h-screen bg-[hsl(var(--wex-palette-blue-50))]">
       <Navigation
         currentPage={currentPage}
         onNavigate={onNavigate}
@@ -60,18 +60,18 @@ export default function ReimburseDocs({
 
       <div className="mx-auto max-w-[1440px] px-8 py-8">
         <div className="mx-auto max-w-[1376px] space-y-6">
-          <h1 className="text-2xl font-semibold text-[#1d2c38]">Reimburse Myself</h1>
+          <h1 className="text-2xl font-semibold text-foreground">Reimburse Myself</h1>
 
           <Card className="border border-slate-200">
             <CardContent className="space-y-8 p-6 md:p-8">
               <div>
-                <p className="text-sm font-semibold text-[#1d2c38]">Available Balance</p>
+                <p className="text-sm font-semibold text-foreground">Available Balance</p>
                 <div className="mt-3 space-y-1">
-                  <div className="flex items-center gap-2 text-sm text-[#1d2c38]">
+                  <div className="flex items-center gap-2 text-sm text-foreground">
                     Medical FSA
                     <Info className="h-4 w-4 text-slate-500" />
                   </div>
-                  <p className="text-xl font-semibold text-[#1d2c38]">$2,734.76</p>
+                  <p className="text-xl font-semibold text-foreground">$2,734.76</p>
                 </div>
               </div>
 
@@ -79,7 +79,7 @@ export default function ReimburseDocs({
 
               <div className="space-y-4">
                 <div className="flex items-center gap-2">
-                  <h2 className="text-base font-semibold text-[#1d2c38]">Receipt or Documentation</h2>
+                  <h2 className="text-base font-semibold text-foreground">Receipt or Documentation</h2>
                   <Info className="h-4 w-4 text-slate-500" />
                 </div>
 
@@ -113,7 +113,7 @@ export default function ReimburseDocs({
                               <FileText className="h-4 w-4 text-blue-700" />
                             </div>
                             <div className="space-y-0.5">
-                              <p className="text-sm font-medium text-[#1d2c38]">{file.name}</p>
+                              <p className="text-sm font-medium text-foreground">{file.name}</p>
                               <p className="text-xs text-muted-foreground">
                                 {file.size} • Added {file.date}
                               </p>
@@ -141,7 +141,7 @@ export default function ReimburseDocs({
                       checked={autoAnalyze}
                       onCheckedChange={(checked) => setAutoAnalyze(Boolean(checked))}
                     />
-                    <label htmlFor="auto-analyze" className="flex items-center gap-1 text-sm text-[#1d2c38]">
+                    <label htmlFor="auto-analyze" className="flex items-center gap-1 text-sm text-foreground">
                       Auto-analyze my claims info <Info className="h-3.5 w-3.5 text-slate-500" />
                     </label>
                   </div>

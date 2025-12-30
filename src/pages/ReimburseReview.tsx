@@ -26,7 +26,7 @@ export default function ReimburseReview({
   onLogout,
 }: ReimburseReviewProps) {
   return (
-    <div className="min-h-screen bg-[#F1FAFE]">
+    <div className="min-h-screen bg-[hsl(var(--wex-palette-blue-50))]">
       <Navigation
         currentPage={currentPage}
         onNavigate={onNavigate}
@@ -47,17 +47,17 @@ export default function ReimburseReview({
 
       <div className="mx-auto max-w-[1440px] px-8 py-8">
         <div className="mx-auto max-w-[1376px] space-y-8">
-          <h1 className="text-2xl font-semibold text-[#1d2c38]">Reimburse Myself</h1>
+          <h1 className="text-2xl font-semibold text-foreground">Reimburse Myself</h1>
 
           <Card className="border border-slate-200">
             <CardContent className="space-y-8 p-6 md:p-8">
               <div>
-                <p className="text-sm font-semibold text-[#1d2c38]">Available Balance</p>
+                <p className="text-sm font-semibold text-foreground">Available Balance</p>
                 <div className="mt-3 space-y-1">
-                  <div className="flex items-center gap-2 text-sm text-[#1d2c38]">
+                  <div className="flex items-center gap-2 text-sm text-foreground">
                     Medical FSA <Info className="h-4 w-4 text-slate-500" />
                   </div>
-                  <p className="text-xl font-semibold text-[#1d2c38]">$2,734.76</p>
+                  <p className="text-xl font-semibold text-foreground">$2,734.76</p>
                 </div>
               </div>
 
@@ -65,9 +65,9 @@ export default function ReimburseReview({
 
               <div className="space-y-4">
                 <div className="flex items-center gap-2">
-                  <h2 className="text-base font-semibold text-[#1d2c38]">Uploaded document</h2>
+                  <h2 className="text-base font-semibold text-foreground">Uploaded document</h2>
                 </div>
-                <div className="flex items-center gap-2 rounded-md bg-blue-50 px-3 py-2 text-xs text-[#1d2c38]">
+                <div className="flex items-center gap-2 rounded-md bg-blue-50 px-3 py-2 text-xs text-foreground">
                   <AlertCircle className="h-4 w-4 text-blue-700" />
                   The form has been pre-filled for your convenience. Please review and correct any errors to ensure accuracy.
                 </div>
@@ -76,42 +76,42 @@ export default function ReimburseReview({
                   <div className="space-y-3">
                     <div className="grid gap-4">
                       <div className="space-y-1">
-                        <Label className="text-sm text-[#1d2c38]">Start Date of Service</Label>
+                        <Label className="text-sm text-foreground">Start Date of Service</Label>
                         <Input value="06/20/2026" readOnly />
                       </div>
                       <div className="space-y-1">
-                        <Label className="text-sm text-[#1d2c38]">End Date of Service</Label>
+                        <Label className="text-sm text-foreground">End Date of Service</Label>
                         <Input value="06/20/2026" readOnly />
                       </div>
                       <div className="space-y-1">
-                        <Label className="text-sm text-[#1d2c38]">Amount</Label>
+                        <Label className="text-sm text-foreground">Amount</Label>
                         <Input value="$150.00" readOnly />
                       </div>
                       <div className="space-y-1">
-                        <Label className="text-sm text-[#1d2c38]">Provider</Label>
+                        <Label className="text-sm text-foreground">Provider</Label>
                         <Input value="Dr. Jorge Doe" readOnly />
                       </div>
                       <div className="space-y-1">
-                        <Label className="text-sm text-[#1d2c38]">Category</Label>
+                        <Label className="text-sm text-foreground">Category</Label>
                         <Input value="Medical" readOnly />
                       </div>
                       <div className="space-y-1">
-                        <Label className="text-sm text-[#1d2c38]">Type</Label>
+                        <Label className="text-sm text-foreground">Type</Label>
                         <Input value="Office Visit" readOnly />
                       </div>
                       <div className="space-y-1">
-                        <Label className="text-sm text-[#1d2c38]">Description</Label>
+                        <Label className="text-sm text-foreground">Description</Label>
                         <Textarea rows={3} value="" readOnly />
                       </div>
                     </div>
 
                     <div className="space-y-3 pt-2">
                       <div className="space-y-2">
-                        <p className="text-sm font-medium text-[#1d2c38]">Recipient</p>
+                        <p className="text-sm font-medium text-foreground">Recipient</p>
                         <RadioGroup value="adam" className="space-y-2">
                           <div className="flex items-center gap-2">
                             <RadioGroupItem value="adam" id="recipient-adam" />
-                            <Label htmlFor="recipient-adam" className="text-sm font-medium text-[#1d2c38]">
+                            <Label htmlFor="recipient-adam" className="text-sm font-medium text-foreground">
                               Adam Smith
                             </Label>
                           </div>
@@ -122,17 +122,17 @@ export default function ReimburseReview({
                       </div>
 
                       <div className="space-y-2">
-                        <p className="text-sm font-medium text-[#1d2c38]">Did you drive to receive this product or service?</p>
+                        <p className="text-sm font-medium text-foreground">Did you drive to receive this product or service?</p>
                         <RadioGroup value="no" className="flex items-center gap-4">
                           <div className="flex items-center gap-2">
                             <RadioGroupItem value="yes" id="drive-yes" />
-                            <Label htmlFor="drive-yes" className="text-sm text-[#1d2c38]">
+                            <Label htmlFor="drive-yes" className="text-sm text-foreground">
                               Yes
                             </Label>
                           </div>
                           <div className="flex items-center gap-2">
                             <RadioGroupItem value="no" id="drive-no" />
-                            <Label htmlFor="drive-no" className="text-sm text-[#1d2c38]">
+                            <Label htmlFor="drive-no" className="text-sm text-foreground">
                               No
                             </Label>
                           </div>
@@ -152,19 +152,19 @@ export default function ReimburseReview({
               <Separator />
 
               <div className="space-y-3">
-                <h3 className="text-sm font-semibold text-[#1d2c38]">Extracted information</h3>
+                <h3 className="text-sm font-semibold text-foreground">Extracted information</h3>
                 <div className="rounded-lg border bg-white">
                   <div className="flex items-center justify-between px-4 py-3 text-sm">
                     <span className="text-muted-foreground">Eligible Items</span>
-                    <span className="text-[#1d2c38]">$150.00</span>
+                    <span className="text-foreground">$150.00</span>
                   </div>
                   <Separator />
                   <div className="flex items-center justify-between px-4 py-3 text-sm">
                     <span className="text-muted-foreground">Office Visit</span>
-                    <span className="text-[#1d2c38]">$150.00</span>
+                    <span className="text-foreground">$150.00</span>
                   </div>
                   <Separator />
-                  <div className="flex items-center justify-between px-4 py-3 text-sm font-semibold text-[#1d2c38]">
+                  <div className="flex items-center justify-between px-4 py-3 text-sm font-semibold text-foreground">
                     <span>Total</span>
                     <span>$150.00</span>
                   </div>

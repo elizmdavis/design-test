@@ -1,43 +1,70 @@
 import * as React from "react"
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group"
-import { CircleIcon } from "lucide-react"
-
+import { Circle } from "lucide-react"
+import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
-function RadioGroup({
-  className,
-  ...props
-}: React.ComponentProps<typeof RadioGroupPrimitive.Root>) {
+const RadioGroup = React.forwardRef<
+  React.ElementRef<typeof RadioGroupPrimitive.Root>,
+  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>
+>(({ className, ...props }, ref) => {
   return (
     <RadioGroupPrimitive.Root
-      data-slot="radio-group"
-      className={cn("grid gap-3", className)}
+      className={cn("grid gap-2", className)}
       {...props}
+      ref={ref}
     />
   )
+})
+RadioGroup.displayName = RadioGroupPrimitive.Root.displayName
+
+const radioItemVariants = cva(
+  [
+    "aspect-square rounded-full border shadow",
+    "border-wex-radio-border bg-wex-radio-bg",
+    "focus:outline-none focus-visible:ring-1 focus-visible:ring-wex-radio-focus-ring",
+    "disabled:cursor-not-allowed disabled:opacity-[var(--wex-component-radio-disabled-opacity)]",
+  ],
+  {
+    variants: {
+      radioSize: {
+        sm: "h-4 w-4",
+        md: "h-5 w-5",
+        lg: "h-6 w-6",
+      },
+    },
+    defaultVariants: {
+      radioSize: "md",
+    },
+  }
+)
+
+const radioIndicatorSizes = {
+  sm: "h-2.5 w-2.5",
+  md: "h-3.5 w-3.5",
+  lg: "h-4 w-4",
 }
 
-function RadioGroupItem({
-  className,
-  ...props
-}: React.ComponentProps<typeof RadioGroupPrimitive.Item>) {
+export interface RadioGroupItemProps
+  extends Omit<React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item>, "size">,
+    VariantProps<typeof radioItemVariants> {}
+
+const RadioGroupItem = React.forwardRef<
+  React.ElementRef<typeof RadioGroupPrimitive.Item>,
+  RadioGroupItemProps
+>(({ className, radioSize, ...props }, ref) => {
   return (
     <RadioGroupPrimitive.Item
-      data-slot="radio-group-item"
-      className={cn(
-        "border-input text-primary focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:bg-input/30 aspect-square size-4 shrink-0 rounded-full border shadow-xs transition-[color,box-shadow] outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50",
-        className
-      )}
+      ref={ref}
+      className={cn(radioItemVariants({ radioSize }), className)}
       {...props}
     >
-      <RadioGroupPrimitive.Indicator
-        data-slot="radio-group-indicator"
-        className="relative flex items-center justify-center"
-      >
-        <CircleIcon className="fill-primary absolute top-1/2 left-1/2 size-2 -translate-x-1/2 -translate-y-1/2" />
+      <RadioGroupPrimitive.Indicator className="flex items-center justify-center">
+        <Circle className={cn(radioIndicatorSizes[radioSize || "md"], "fill-wex-radio-checked-fg")} />
       </RadioGroupPrimitive.Indicator>
     </RadioGroupPrimitive.Item>
   )
-}
+})
+RadioGroupItem.displayName = RadioGroupPrimitive.Item.displayName
 
-export { RadioGroup, RadioGroupItem }
+export { RadioGroup, RadioGroupItem, radioItemVariants }

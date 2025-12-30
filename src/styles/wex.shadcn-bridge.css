@@ -1,0 +1,178 @@
+/* ============================================================
+   SHADCN SEMANTIC BRIDGE
+   ============================================================
+   This file maps WEX tokens to shadcn semantic variables.
+   
+   This file is HAND-AUTHORED (semantic decisions require intent).
+   It will NOT become a Style Dictionary output.
+   
+   RULES:
+   - All values MUST reference --wex-* variables
+   - NO raw HSL values allowed
+   - State variants (hover, active) are included for Tailwind utilities
+   ============================================================ */
+
+:root {
+  /* ===== BACKGROUNDS ===== */
+  --background: hsl(var(--wex-content-bg));
+  --foreground: hsl(var(--wex-text));
+
+  /* ===== CARD ===== */
+  --card: hsl(var(--wex-content-bg));
+  --card-foreground: hsl(var(--wex-text));
+
+  /* ===== POPOVER ===== */
+  --popover: hsl(var(--wex-content-bg));
+  --popover-foreground: hsl(var(--wex-text));
+
+  /* ===== BRAND ===== */
+  --brand-red: hsl(var(--wex-brand-red));
+
+  /* ===== PRIMARY (with state) ===== */
+  --primary: hsl(var(--wex-primary));
+  --primary-foreground: hsl(var(--wex-primary-contrast));
+  --primary-hover: hsl(var(--wex-primary-hover));
+
+  /* ===== LINK (for text links) ===== */
+  --link: hsl(var(--wex-link));
+  --link-hover: hsl(var(--wex-link-hover));
+  --link-active: hsl(var(--wex-link-active));
+
+  /* ===== SECONDARY (with state) ===== */
+  --secondary: hsl(var(--wex-content-border));
+  --secondary-foreground: hsl(var(--wex-text));
+  --secondary-hover: hsl(var(--wex-surface-subtle));
+
+  /* ===== MUTED ===== */
+  --muted: hsl(var(--wex-surface-subtle));
+  --muted-foreground: hsl(var(--wex-text-muted));
+
+  /* ===== ACCENT (subtle interactive hover surface) ===== */
+  --accent: hsl(var(--wex-surface-subtle));
+  --accent-foreground: hsl(var(--wex-text));
+
+  /* ===== DESTRUCTIVE (with state) ===== */
+  --destructive: hsl(var(--wex-destructive));
+  --destructive-foreground: hsl(var(--wex-destructive-foreground));
+  --destructive-hover: hsl(var(--wex-destructive-hover));
+
+  /* ===== SUCCESS (with state) ===== */
+  --success: hsl(var(--wex-success));
+  --success-foreground: hsl(var(--wex-success-foreground));
+  --success-hover: hsl(var(--wex-success-hover));
+
+  /* ===== WARNING (with state) ===== */
+  --warning: hsl(var(--wex-warning));
+  --warning-foreground: hsl(var(--wex-warning-foreground));
+  --warning-hover: hsl(var(--wex-warning-hover));
+
+  /* ===== INFO (with state) ===== */
+  --info: hsl(var(--wex-info));
+  --info-foreground: hsl(var(--wex-info-foreground));
+  --info-hover: hsl(var(--wex-info-hover));
+
+  /* ===== BORDERS & INPUTS ===== */
+  --border: hsl(var(--wex-content-border));
+  --input: hsl(var(--wex-input-border));
+  --ring: hsl(var(--wex-focus-ring-color));
+
+  /* ===== RADII ===== */
+  --radius: var(--wex-radius-md);
+
+  /* ===== SIDEBAR (maps to existing surface tokens) ===== */
+  --sidebar-background: hsl(var(--wex-content-bg));
+  --sidebar-foreground: hsl(var(--wex-text));
+  --sidebar-primary: hsl(var(--wex-primary));
+  --sidebar-primary-foreground: hsl(var(--wex-primary-contrast));
+  --sidebar-accent: hsl(var(--wex-surface-subtle));
+  --sidebar-accent-foreground: hsl(var(--wex-text));
+  --sidebar-border: hsl(var(--wex-content-border));
+  --sidebar-ring: hsl(var(--wex-focus-ring-color));
+
+  /* ===== CHART (placeholder - requires brand guidance) ===== */
+  --chart-1: hsl(var(--wex-chart-1));
+  --chart-2: hsl(var(--wex-chart-2));
+  --chart-3: hsl(var(--wex-chart-3));
+  --chart-4: hsl(var(--wex-chart-4));
+  --chart-5: hsl(var(--wex-chart-5));
+}
+
+.dark {
+  /* ===== BACKGROUNDS (dark overrides) ===== */
+  --background: hsl(var(--wex-content-bg));
+  --foreground: hsl(var(--wex-text));
+
+  /* ===== CARD (dark overrides) ===== */
+  --card: hsl(var(--wex-content-bg));
+  --card-foreground: hsl(var(--wex-text));
+
+  /* ===== POPOVER (dark overrides) ===== */
+  --popover: hsl(var(--wex-content-bg));
+  --popover-foreground: hsl(var(--wex-text));
+
+  /* ===== PRIMARY (with state) ===== */
+  --primary: hsl(var(--wex-primary));
+  --primary-foreground: hsl(var(--wex-primary-contrast));
+  --primary-hover: hsl(var(--wex-primary-hover));
+
+  /* ===== LINK ===== */
+  --link: hsl(var(--wex-link));
+  --link-hover: hsl(var(--wex-link-hover));
+  --link-active: hsl(var(--wex-link-active));
+
+  /* ===== SECONDARY (with state) ===== */
+  --secondary: hsl(var(--wex-content-border));
+  --secondary-foreground: hsl(var(--wex-text));
+  --secondary-hover: hsl(var(--wex-surface-subtle));
+
+  /* ===== MUTED ===== */
+  --muted: hsl(var(--wex-surface-subtle));
+  --muted-foreground: hsl(var(--wex-text-muted));
+
+  /* ===== ACCENT ===== */
+  --accent: hsl(var(--wex-surface-subtle));
+  --accent-foreground: hsl(var(--wex-text));
+
+  /* ===== DESTRUCTIVE ===== */
+  --destructive: hsl(var(--wex-destructive));
+  --destructive-foreground: hsl(var(--wex-destructive-foreground));
+  --destructive-hover: hsl(var(--wex-destructive-hover));
+
+  /* ===== SUCCESS ===== */
+  --success: hsl(var(--wex-success));
+  --success-foreground: hsl(var(--wex-success-foreground));
+  --success-hover: hsl(var(--wex-success-hover));
+
+  /* ===== WARNING ===== */
+  --warning: hsl(var(--wex-warning));
+  --warning-foreground: hsl(var(--wex-warning-foreground));
+  --warning-hover: hsl(var(--wex-warning-hover));
+
+  /* ===== INFO ===== */
+  --info: hsl(var(--wex-info));
+  --info-foreground: hsl(var(--wex-info-foreground));
+  --info-hover: hsl(var(--wex-info-hover));
+
+  /* ===== BORDERS & INPUTS ===== */
+  --border: hsl(var(--wex-content-border));
+  --input: hsl(var(--wex-input-border));
+  --ring: hsl(var(--wex-focus-ring-color));
+
+  /* ===== SIDEBAR ===== */
+  --sidebar-background: hsl(var(--wex-content-bg));
+  --sidebar-foreground: hsl(var(--wex-text));
+  --sidebar-primary: hsl(var(--wex-primary));
+  --sidebar-primary-foreground: hsl(var(--wex-primary-contrast));
+  --sidebar-accent: hsl(var(--wex-surface-subtle));
+  --sidebar-accent-foreground: hsl(var(--wex-text));
+  --sidebar-border: hsl(var(--wex-content-border));
+  --sidebar-ring: hsl(var(--wex-focus-ring-color));
+
+  /* ===== CHART ===== */
+  --chart-1: hsl(var(--wex-chart-1));
+  --chart-2: hsl(var(--wex-chart-2));
+  --chart-3: hsl(var(--wex-chart-3));
+  --chart-4: hsl(var(--wex-chart-4));
+  --chart-5: hsl(var(--wex-chart-5));
+}
+

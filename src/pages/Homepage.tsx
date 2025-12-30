@@ -1,22 +1,26 @@
+import { useCallback, useMemo } from "react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
 import { Separator } from "@/components/ui/separator"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
 import Navigation from "@/components/Navigation"
+import { setProfileSubPage } from "@/lib/profile-utils"
 import {
   Search,
   Mic,
   Send,
-  Grid3x3,
   CircleAlert,
   CheckCircle2,
   XCircle,
   Info,
   ShoppingCart,
-  Palette,
 } from "lucide-react"
+import type { PageNavigationProps } from "@/App"
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Types
+// ─────────────────────────────────────────────────────────────────────────────
 
 interface Account {
   type: string
@@ -39,83 +43,89 @@ interface Transaction {
   isPositive: boolean
 }
 
-interface HomepageProps {
-  currentPage: string
-  onNavigate: (page: string) => void
-  onNavigateToAdmin: () => void
-  onNavigateToShowcase: () => void
-  onNavigateToMyProfile: () => void
-  onNavigateToMessageCenter: () => void
-  onLogout: () => void
-}
+// ─────────────────────────────────────────────────────────────────────────────
+// Static Data
+// ─────────────────────────────────────────────────────────────────────────────
+
+const HSA_ACCOUNTS: Account[] = [
+  { type: "Cash Account", balance: "$0.00" },
+  { type: "Investment Account", balance: "$0.00" },
+]
+
+const CLAIMS: Claim[] = [
+  {
+    status: "denied",
+    count: 1,
+    description: "Your [medical] claim for [CVS Pharmacy] was denied",
+    reason: "not eligible",
+    action: "View Details",
+  },
+  {
+    status: "action-required",
+    count: 1,
+    description: "Your [medical] claim for [John Doe] requires a new receipt",
+    reason: "receipt missing date of service",
+    action: "Upload Receipt",
+  },
+  {
+    status: "approved",
+    count: 6,
+    description: "6 claims have been recently approved totaling $698.00",
+  },
+]
+
+const TRANSACTIONS: Transaction[] = [
+  { date: "Pending", description: "Payroll Contribution", account: "HSA", amount: "$158.00", isPositive: true },
+  { date: "01/16/2025", description: "Walgreens", account: "HSA", amount: "- $26.00", isPositive: false },
+  { date: "01/16/2025", description: "Payroll Contribution", account: "HSA", amount: "$158.00", isPositive: true },
+  { date: "01/16/2025", description: "Little One's Daycare", account: "Dependent Care FSA", amount: "- $146.00", isPositive: false },
+]
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Component
+// ─────────────────────────────────────────────────────────────────────────────
 
 export default function Homepage({
   currentPage,
   onNavigate,
   onNavigateToAdmin,
-  onNavigateToShowcase,
   onNavigateToMyProfile,
   onNavigateToMessageCenter,
   onLogout,
-}: HomepageProps) {
-  // Mock data
-  const hsaAccounts: Account[] = [
-    { type: "Cash Account", balance: "$0.00" },
-    { type: "Investment Account", balance: "$0.00" },
-  ]
-
-  const claims: Claim[] = [
-    {
-      status: "denied",
-      count: 1,
-      description: "Your [medical] claim for [CVS Pharmacy] was denied",
-      reason: "not eligible",
-      action: "View Details",
+}: PageNavigationProps) {
+  // Stable callback for navigating with profile sub-page
+  const handleNavigateToMyProfileWithSubPage = useCallback(
+    (subPage: string) => {
+      setProfileSubPage(subPage)
+      onNavigateToMyProfile()
     },
-    {
-      status: "action-required",
-      count: 1,
-      description: "Your [medical] claim for [John Doe] requires a new receipt",
-      reason: "receipt missing date of service",
-      action: "Upload Receipt",
-    },
-    {
-      status: "approved",
-      count: 6,
-      description: "6 claims have been recently approved totaling $698.00",
-    },
-  ]
+    [onNavigateToMyProfile]
+  )
 
-  const transactions: Transaction[] = [
-    { date: "Pending", description: "Payroll Contribution", account: "HSA", amount: "$158.00", isPositive: true },
-    { date: "01/16/2025", description: "Walgreens", account: "HSA", amount: "- $26.00", isPositive: false },
-    { date: "01/16/2025", description: "Payroll Contribution", account: "HSA", amount: "$158.00", isPositive: true },
-    { date: "01/16/2025", description: "Little One's Daycare", account: "Dependent Care FSA", amount: "- $146.00", isPositive: false },
-  ]
+  // Stable callback for reimburse navigation
+  const navigateToReimburse = useCallback(() => {
+    onNavigate("reimburse")
+  }, [onNavigate])
 
-  const suggestionChips = [
-    { label: "Reimburse Myself", onClick: () => onNavigate("reimburse") },
-    { label: "Send Payment" },
-    { label: "Contribute to HSA" },
-    { label: "Manage Investments" },
-    { label: "Manage My Expenses" },
-  ]
+  // Suggestion chips with stable callbacks
+  const suggestionChips = useMemo(
+    () => [
+      { label: "Reimburse Myself", onClick: navigateToReimburse },
+      { label: "Send Payment" },
+      { label: "Contribute to HSA" },
+      { label: "Manage Investments" },
+      { label: "Manage My Expenses" },
+    ],
+    [navigateToReimburse]
+  )
 
   return (
-    <div className="min-h-screen bg-[#F1FAFE]">
+    <div className="min-h-screen bg-[hsl(var(--wex-palette-blue-50))]">
       <Navigation
         currentPage={currentPage}
         onNavigate={onNavigate}
         onNavigateToMyProfile={onNavigateToMyProfile}
-        onNavigateToMyProfileWithSubPage={(subPage) => {
-          try {
-            localStorage.setItem("myProfileSubPage", subPage)
-            window.dispatchEvent(new Event("myProfileSubPageChange"))
-          } catch {
-            // Ignore errors
-          }
-          onNavigateToMyProfile()
-        }}
+        onNavigateToMyProfileWithSubPage={handleNavigateToMyProfileWithSubPage}
         onNavigateToAdmin={onNavigateToAdmin}
         onNavigateToMessageCenter={onNavigateToMessageCenter}
         onLogout={onLogout}
@@ -127,7 +137,7 @@ export default function Homepage({
           {/* AI Chat Section */}
           <div className="space-y-6">
             <h2 className="text-2xl font-semibold">What can we help you with today?</h2>
-            
+
             <div className="space-y-4">
               {/* Search Input */}
               <div className="relative">
@@ -175,7 +185,7 @@ export default function Homepage({
                   <Button variant="link" className="text-blue-600">
                     View All Accounts →
                   </Button>
-                  <Button onClick={() => onNavigate("reimburse")}>Reimburse Myself</Button>
+                  <Button onClick={navigateToReimburse}>Reimburse Myself</Button>
                 </div>
               </div>
 
@@ -192,15 +202,15 @@ export default function Homepage({
                         <div className="text-right">Available Balance</div>
                       </div>
                       {/* Table Rows */}
-                      {hsaAccounts.map((account, index) => (
-                        <div key={index}>
+                      {HSA_ACCOUNTS.map((account, index) => (
+                        <div key={account.type}>
                           <div className="flex items-center justify-between py-3">
                             <Button variant="link" className="h-auto p-0 text-blue-600">
                               {account.type}
                             </Button>
                             <span className="font-medium">{account.balance}</span>
                           </div>
-                          {index < hsaAccounts.length - 1 && <Separator />}
+                          {index < HSA_ACCOUNTS.length - 1 && <Separator />}
                         </div>
                       ))}
                     </div>
@@ -254,8 +264,8 @@ export default function Homepage({
               </div>
 
               <div className="grid grid-cols-3 gap-6">
-                {claims.map((claim, index) => (
-                  <Card key={index}>
+                {CLAIMS.map((claim) => (
+                  <Card key={claim.description}>
                     <CardContent className="p-4">
                       <div className="mb-4 flex items-center gap-3">
                         <div
@@ -315,8 +325,8 @@ export default function Homepage({
                 </div>
 
                 <div className="space-y-4">
-                  {transactions.map((transaction, index) => (
-                    <div key={index}>
+                  {TRANSACTIONS.map((transaction, index) => (
+                    <div key={`${transaction.date}-${transaction.description}`}>
                       <div className="flex items-center justify-between">
                         <div className="flex-1">
                           <div className="text-sm text-muted-foreground">{transaction.date}</div>
@@ -335,7 +345,7 @@ export default function Homepage({
                           </div>
                         </div>
                       </div>
-                      {index < transactions.length - 1 && <Separator className="mt-4" />}
+                      {index < TRANSACTIONS.length - 1 && <Separator className="mt-4" />}
                     </div>
                   ))}
                 </div>
@@ -411,34 +421,6 @@ export default function Homepage({
           </p>
         </div>
       </footer>
-
-      {/* Floating Components Menu */}
-      <div className="fixed bottom-6 right-6 z-50">
-        <Popover>
-          <PopoverTrigger asChild>
-            <Button
-              size="lg"
-              className="h-14 w-14 rounded-full shadow-lg"
-              aria-label="Open components menu"
-            >
-              <Palette className="h-6 w-6" />
-            </Button>
-          </PopoverTrigger>
-          <PopoverContent className="w-64" align="end" side="top">
-            <div className="space-y-1">
-              <Button
-                variant="ghost"
-                className="w-full justify-start"
-                onClick={onNavigateToShowcase}
-              >
-                <Grid3x3 className="mr-2 h-4 w-4" />
-                View Shad Components
-              </Button>
-            </div>
-          </PopoverContent>
-        </Popover>
-      </div>
     </div>
   )
 }
-

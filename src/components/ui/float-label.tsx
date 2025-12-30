@@ -1,160 +1,173 @@
+"use client"
+
 import * as React from "react"
+import { cva, type VariantProps } from "class-variance-authority"
 import { cn } from "@/lib/utils"
 
+/**
+ * FloatLabel - Floating label input component
+ * 
+ * Provides a Material Design / PrimeNG-style floating label that animates
+ * from inside the input to above it when focused or containing a value.
+ * 
+ * Uses CSS peer selectors for pure-CSS state detection:
+ * - placeholder=" " enables :placeholder-shown detection
+ * - peer-focus: detects focus state
+ * - peer-[:not(:placeholder-shown)]: detects filled state
+ */
+
+const floatLabelVariants = cva(
+  "relative w-full",
+  {
+    variants: {
+      size: {
+        sm: "",
+        md: "",
+        lg: "",
+      },
+    },
+    defaultVariants: {
+      size: "md",
+    },
+  }
+)
+
+const floatLabelInputVariants = cva(
+  [
+    // Base input styles
+    "peer w-full rounded-md px-3 text-sm shadow-sm transition-colors",
+    // Layer 3 tokens
+    "text-wex-input-fg",
+    "bg-wex-input-bg",
+    "border border-wex-input-border",
+    // Hover
+    "hover:border-wex-input-border-hover",
+    // Focus
+    "focus:outline-none focus:border-wex-input-border-focus focus:ring-1 focus:ring-wex-input-focus-ring",
+    // Disabled
+    "disabled:cursor-not-allowed disabled:opacity-50",
+    "disabled:bg-wex-input-disabled-bg disabled:text-wex-input-disabled-fg",
+    // Placeholder - hidden but needed for :placeholder-shown
+    "placeholder:text-transparent",
+  ],
+  {
+    variants: {
+      size: {
+        sm: "h-10 pt-4 pb-1 text-xs",
+        md: "h-14 pt-5 pb-2",
+        lg: "h-16 pt-6 pb-2 text-base",
+      },
+      invalid: {
+        true: [
+          "border-[hsl(var(--wex-component-input-invalid-border))]",
+          "focus:border-[hsl(var(--wex-component-input-invalid-border))]",
+          "focus:ring-[hsl(var(--wex-component-input-invalid-focus-ring))]",
+        ].join(" "),
+        false: "",
+      },
+    },
+    defaultVariants: {
+      size: "md",
+      invalid: false,
+    },
+  }
+)
+
+const floatLabelLabelVariants = cva(
+  [
+    // Positioning
+    "absolute pointer-events-none",
+    "origin-top-left transition-all duration-200 ease-out",
+    // Default state (inside input)
+    "text-wex-floatlabel-label-fg",
+    // Floated state - applied on focus OR when input has value
+    "peer-focus:text-wex-floatlabel-label-focus-fg",
+    "peer-focus:scale-75 peer-focus:-translate-y-2.5",
+    "peer-[:not(:placeholder-shown)]:scale-75 peer-[:not(:placeholder-shown)]:-translate-y-2.5",
+    // When both focused AND has value, use focus color
+    "peer-focus:peer-[:not(:placeholder-shown)]:text-wex-floatlabel-label-focus-fg",
+  ],
+  {
+    variants: {
+      size: {
+        sm: "top-2.5 text-xs peer-focus:text-[10px] peer-[:not(:placeholder-shown)]:text-[10px]",
+        md: "top-4 text-sm peer-focus:text-xs peer-[:not(:placeholder-shown)]:text-xs",
+        lg: "top-5 text-base peer-focus:text-sm peer-[:not(:placeholder-shown)]:text-sm",
+      },
+    },
+    defaultVariants: {
+      size: "md",
+    },
+  }
+)
+
 export interface FloatLabelProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {
+  extends Omit<React.ComponentProps<"input">, "size" | "placeholder">,
+    VariantProps<typeof floatLabelVariants> {
+  /** The floating label text */
   label: string
-  error?: boolean
+  /** Size variant */
+  size?: "sm" | "md" | "lg"
+  /** Invalid state for form validation */
+  invalid?: boolean
+  /** Container className */
+  containerClassName?: string
+  /** Icon to display on the left side of the input */
   leftIcon?: React.ReactNode
+  /** Icon to display on the right side of the input */
   rightIcon?: React.ReactNode
-  onRightIconClick?: () => void
-  onLeftIconClick?: () => void
 }
 
 const FloatLabel = React.forwardRef<HTMLInputElement, FloatLabelProps>(
-  (
-    {
-      label,
-      className,
-      error = false,
-      leftIcon,
-      rightIcon,
-      onRightIconClick,
-      onLeftIconClick,
-      type,
-      id,
-      ...props
-    },
-    ref
-  ) => {
-    const [isFocused, setIsFocused] = React.useState(false)
-    const [hasValue, setHasValue] = React.useState(false)
-
-    const inputRef = React.useRef<HTMLInputElement>(null)
-    
-    // Combine refs
-    const combinedRef = React.useCallback(
-      (node: HTMLInputElement | null) => {
-        inputRef.current = node
-        if (typeof ref === "function") {
-          ref(node)
-        } else if (ref) {
-          ref.current = node
-        }
-      },
-      [ref]
-    )
-
-    React.useEffect(() => {
-      if (inputRef.current) {
-        setHasValue(!!inputRef.current.value)
-      }
-    }, [props.value, props.defaultValue])
-
-    const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
-      setIsFocused(true)
-      props.onFocus?.(e)
-    }
-
-    const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-      setIsFocused(false)
-      setHasValue(!!e.target.value)
-      props.onBlur?.(e)
-    }
-
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      setHasValue(!!e.target.value)
-      props.onChange?.(e)
-    }
-
-    const isActive = isFocused || hasValue
+  ({ className, containerClassName, label, size, invalid, id, leftIcon, rightIcon, ...props }, ref) => {
+    // Generate a unique id if not provided
     const generatedId = React.useId()
     const inputId = id || generatedId
 
     return (
-      <div className="relative w-full">
+      <div className={cn(floatLabelVariants({ size }), containerClassName)}>
+        {/* Left icon */}
+        {leftIcon && (
+          <div className="absolute left-3 top-1/2 -translate-y-1/2 flex items-center pointer-events-none text-wex-input-placeholder z-10">
+            {leftIcon}
+          </div>
+        )}
+        
         <input
-          ref={combinedRef}
           id={inputId}
-          type={type}
+          ref={ref}
+          placeholder=" " // Required for :placeholder-shown detection
+          aria-invalid={invalid || undefined}
           className={cn(
-            "peer h-14 w-full rounded-md border border-input bg-transparent px-3 pb-2 pt-6 text-base shadow-sm transition-colors",
-            "placeholder:text-transparent",
-            "focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring",
-            "disabled:cursor-not-allowed disabled:opacity-50",
+            floatLabelInputVariants({ size, invalid }),
             leftIcon && "pl-10",
             rightIcon && "pr-10",
-            error &&
-              "border-destructive focus-visible:ring-destructive",
             className
           )}
-          onFocus={handleFocus}
-          onBlur={handleBlur}
-          onChange={handleChange}
-          aria-invalid={error}
-          aria-describedby={error ? `${inputId}-error` : undefined}
           {...props}
         />
+        
         <label
           htmlFor={inputId}
           className={cn(
-            "absolute left-3 top-1/2 -translate-y-1/2 origin-left transition-all duration-200 pointer-events-none",
-            "text-sm text-muted-foreground",
-            leftIcon && "left-10",
-            isActive && [
-              "top-2 translate-y-0 scale-75",
-              "text-xs",
-              isFocused && !error && "text-primary",
-            ],
-            error && "text-destructive",
-            props.disabled && "opacity-50"
+            floatLabelLabelVariants({ size }),
+            leftIcon ? "left-10" : "left-3"
           )}
         >
           {label}
         </label>
-        {leftIcon && (
-          <div
-            className={cn(
-              "absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground transition-colors",
-              isFocused && !error && "text-primary",
-              error && "text-destructive",
-              onLeftIconClick && "cursor-pointer hover:text-foreground",
-              props.disabled && "opacity-50 cursor-not-allowed"
-            )}
-            onClick={props.disabled ? undefined : onLeftIconClick}
-            role={onLeftIconClick ? "button" : undefined}
-            tabIndex={onLeftIconClick && !props.disabled ? 0 : undefined}
-          >
-            {leftIcon}
-          </div>
-        )}
+        
+        {/* Right icon */}
         {rightIcon && (
-          <div
-            className={cn(
-              "absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground transition-colors",
-              isFocused && !error && "text-primary",
-              error && "text-destructive",
-              onRightIconClick && "cursor-pointer hover:text-foreground",
-              props.disabled && "opacity-50 cursor-not-allowed"
-            )}
-            onClick={props.disabled ? undefined : onRightIconClick}
-            role={onRightIconClick ? "button" : undefined}
-            tabIndex={onRightIconClick && !props.disabled ? 0 : undefined}
-          >
+          <div className="absolute right-3 top-1/2 -translate-y-1/2 flex items-center pointer-events-none text-wex-input-placeholder z-10">
             {rightIcon}
           </div>
-        )}
-        {error && props["aria-describedby"] && (
-          <span id={`${inputId}-error`} className="sr-only">
-            Error
-          </span>
         )}
       </div>
     )
   }
 )
-
 FloatLabel.displayName = "FloatLabel"
 
-export { FloatLabel }
+export { FloatLabel, floatLabelVariants, floatLabelInputVariants, floatLabelLabelVariants }
 
